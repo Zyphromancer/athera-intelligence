@@ -1,24 +1,46 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Toaster } from "@/components/ui/sonner";
+import { IntroAnimation } from "@/components/site/IntroAnimation";
+import { SiteNav } from "@/components/site/SiteNav";
+import { SiteFooter } from "@/components/site/SiteFooter";
+import { Hero } from "@/components/site/sections/Hero";
+import { Services } from "@/components/site/sections/Services";
+import { Projects } from "@/components/site/sections/Projects";
+import { BeforeAfterSection } from "@/components/site/sections/BeforeAfterSection";
+import { Testimonials } from "@/components/site/sections/Testimonials";
+import { FAQ } from "@/components/site/sections/FAQ";
+import { Contact } from "@/components/site/sections/Contact";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
   component: Index,
+  head: () => ({
+    meta: [
+      { title: "Athera Intelligence — AI, Apps & Software Engineering" },
+      { name: "description", content: "Custom software, mobile apps, and AI systems for ambitious companies. Corporate craftsmanship, modern edge." },
+      { property: "og:title", content: "Athera Intelligence — AI, Apps & Software Engineering" },
+      { property: "og:description", content: "Custom software, mobile apps, and AI systems for ambitious companies." },
+    ],
+  }),
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
+    <>
+      <IntroAnimation />
+      <div className="relative min-h-screen bg-background text-foreground selection:bg-[oklch(0.82_0.14_86)] selection:text-black">
+        <SiteNav />
+        <main>
+          <Hero />
+          <Services />
+          <Projects />
+          <BeforeAfterSection />
+          <Testimonials />
+          <FAQ />
+          <Contact />
+        </main>
+        <SiteFooter />
+        <Toaster theme="dark" position="bottom-right" />
+      </div>
+    </>
   );
 }
