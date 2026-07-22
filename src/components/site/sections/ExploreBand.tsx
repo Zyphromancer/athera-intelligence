@@ -3,6 +3,12 @@ import { TiltCard } from "@/components/site/TiltCard";
 
 const cards = [
   {
+    to: "/case-studies" as const,
+    badge: "Long-form",
+    title: "Read the case studies",
+    body: "The brief, the trade-offs, and the outcome — one engagement at a time, told in full.",
+  },
+  {
     to: "/example" as const,
     badge: "Timeline & price",
     title: "See a real engagement",
@@ -33,7 +39,7 @@ export function ExploreBand() {
           <h2 className="mt-4 font-display text-4xl text-gold-metallic sm:text-5xl md:text-6xl">Explore</h2>
           <p className="mt-4 text-muted-foreground">Three places to look next — pick the one that answers your question best.</p>
         </div>
-        <div className="mt-12 sm:mt-16 grid gap-5 sm:gap-6 md:grid-cols-3">
+        <div className="mt-12 sm:mt-16 grid gap-5 sm:gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {cards.map((c) => (
             <TiltCard key={c.to} intensity={6}>
               <Link to={c.to} className="group flex h-full flex-col p-6 sm:p-8">
