@@ -56,6 +56,8 @@ const BookCallNotificationEmail = ({
             <Text style={{ ...value, whiteSpace: 'pre-wrap' }}>{topic}</Text>
           </>
         ) : null}
+        <Hr style={hr} />
+        <Text style={footer}>Athera Intelligence</Text>
       </Container>
     </Body>
   </Html>
@@ -84,3 +86,4 @@ const h1 = { fontSize: '22px', fontWeight: 'bold' as const, color: '#000000', ma
 const label = { fontSize: '11px', letterSpacing: '0.15em', textTransform: 'uppercase' as const, color: '#8a8a8a', margin: '16px 0 4px' }
 const value = { fontSize: '14px', color: '#111111', lineHeight: '1.5', margin: '0' }
 const hr = { borderColor: '#eeeeee', margin: '20px 0' }
+const footer = { fontSize: '12px', color: '#8a8a8a', margin: '20px 0 0' }
