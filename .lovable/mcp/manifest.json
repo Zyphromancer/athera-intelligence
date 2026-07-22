@@ -1,0 +1,207 @@
+{
+  "version": 1,
+  "sdk_version": "0.24.0",
+  "path": "/mcp",
+  "auth": {
+    "type": "none"
+  },
+  "mcp": {
+    "server": {
+      "name": "athera-intelligence-mcp",
+      "version": "0.1.0",
+      "title": "Athera Intelligence"
+    },
+    "tools": [
+      {
+        "name": "get_company_info",
+        "title": "Get company info",
+        "description": "Return Athera Intelligence's public overview: services, locations, contact email, engagement model, and mid-range price band.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "list_projects",
+        "title": "List projects",
+        "description": "Return the list of Athera Intelligence projects shown on the site (client work, concept builds, and studio projects) with pitch, outcomes, and tech tags.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "list_case_studies",
+        "title": "List case studies",
+        "description": "Return summaries of Athera Intelligence case studies (slug, title, category, summary, status).",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "get_case_study",
+        "title": "Get case study",
+        "description": "Return the full contents of a single Athera Intelligence case study by slug.",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "slug": {
+              "type": "string",
+              "minLength": 1,
+              "description": "The case study slug, e.g. 'trenfotball'."
+            }
+          },
+          "required": [
+            "slug"
+          ]
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "list_transformations",
+        "title": "List before/after transformations",
+        "description": "Return the list of before/after transformation examples featured on the site (title, category, caption).",
+        "annotations": {
+          "readOnlyHint": true,
+          "idempotentHint": true,
+          "openWorldHint": false
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {}
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "submit_contact_inquiry",
+        "title": "Submit contact inquiry",
+        "description": "Send a project inquiry to Athera Intelligence — same fields as the website contact form. Delivered by email to contact@athera-intelligence.com.",
+        "annotations": {
+          "readOnlyHint": false,
+          "destructiveHint": false,
+          "openWorldHint": true
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 120,
+              "description": "Sender's name."
+            },
+            "email": {
+              "type": "string",
+              "maxLength": 200,
+              "format": "email",
+              "pattern": "^(?!\\.)(?!.*\\.\\.)([A-Za-z0-9_'+\\-\\.]*)[A-Za-z0-9_+-]@([A-Za-z0-9][A-Za-z0-9\\-]*\\.)+[A-Za-z]{2,}$",
+              "description": "Sender's email address (used for reply)."
+            },
+            "company": {
+              "description": "Optional company name.",
+              "type": "string",
+              "maxLength": 160
+            },
+            "message": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 5000,
+              "description": "Project brief or inquiry message."
+            }
+          },
+          "required": [
+            "name",
+            "email",
+            "message"
+          ]
+        },
+        "outputSchema": null
+      },
+      {
+        "name": "request_call_booking",
+        "title": "Request a call booking",
+        "description": "Request an intro call with Athera Intelligence — same fields as the website booking form. Delivered by email to contact@athera-intelligence.com.",
+        "annotations": {
+          "readOnlyHint": false,
+          "destructiveHint": false,
+          "openWorldHint": true
+        },
+        "inputSchema": {
+          "$schema": "http://json-schema.org/draft-07/schema#",
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "minLength": 1,
+              "maxLength": 120
+            },
+            "email": {
+              "type": "string",
+              "maxLength": 200,
+              "format": "email",
+              "pattern": "^(?!\\.)(?!.*\\.\\.)([A-Za-z0-9_'+\\-\\.]*)[A-Za-z0-9_+-]@([A-Za-z0-9][A-Za-z0-9\\-]*\\.)+[A-Za-z]{2,}$"
+            },
+            "company": {
+              "type": "string",
+              "maxLength": 160
+            },
+            "date": {
+              "description": "Preferred date (free-form, e.g. 'Tue 28 Jul').",
+              "type": "string",
+              "maxLength": 40
+            },
+            "time": {
+              "description": "Preferred time window.",
+              "type": "string",
+              "maxLength": 40
+            },
+            "timezone": {
+              "type": "string",
+              "maxLength": 80
+            },
+            "topic": {
+              "description": "What the caller wants to discuss.",
+              "type": "string",
+              "maxLength": 5000
+            }
+          },
+          "required": [
+            "name",
+            "email"
+          ]
+        },
+        "outputSchema": null
+      }
+    ]
+  }
+}
