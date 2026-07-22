@@ -89,15 +89,34 @@ function ExamplePage() {
 function BookACallSection() {
   const [submitting, setSubmitting] = useState(false);
 
-  function onSubmit(e: FormEvent<HTMLFormElement>) {
+  async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setSubmitting(true);
     const form = e.currentTarget;
-    window.setTimeout(() => {
-      setSubmitting(false);
+    const fd = new FormData(form);
+    const payload = {
+      name: String(fd.get("name") ?? ""),
+      email: String(fd.get("email") ?? ""),
+      company: String(fd.get("company") ?? ""),
+      date: String(fd.get("date") ?? ""),
+      time: String(fd.get("time") ?? ""),
+      timezone: String(fd.get("timezone") ?? ""),
+      topic: String(fd.get("topic") ?? ""),
+    };
+    setSubmitting(true);
+    try {
+      const res = await fetch("/api/book-a-call", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      if (!res.ok) throw new Error(String(res.status));
       form.reset();
       toast.success("Call request received. We'll confirm a time within one business day.");
-    }, 700);
+    } catch {
+      toast.error("Something went wrong. Please email contact@athera-intelligence.com directly.");
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   return (
