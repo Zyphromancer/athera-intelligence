@@ -97,6 +97,48 @@ function CaseStudyDetail() {
 
       {study.status !== "coming-soon" && (
         <>
+          {study.meta && (
+            <section className="relative pb-8">
+              <div className="mx-auto max-w-5xl px-6">
+                <div className="grid grid-cols-2 gap-6 sm:grid-cols-4">
+                  {study.meta.role && <MetaItem label="Role" value={study.meta.role} />}
+                  {study.meta.platform && <MetaItem label="Platform" value={study.meta.platform} />}
+                  {study.meta.status && <MetaItem label="Status" value={study.meta.status} />}
+                  {study.meta.stack && study.meta.stack.length > 0 && (
+                    <MetaItem label="Stack" value={study.meta.stack.join(" · ")} />
+                  )}
+                </div>
+              </div>
+            </section>
+          )}
+
+          {study.sections && study.sections.length > 0 && (
+            <section className="relative py-12 md:py-16">
+              <div className="mx-auto max-w-3xl space-y-10 px-6">
+                {study.sections.map((s) => (
+                  <div key={s.heading}>
+                    <p className="text-[10px] uppercase tracking-[0.35em] text-[oklch(0.82_0.14_86)]">
+                      {s.heading}
+                    </p>
+                    <p className="mt-4 text-base leading-relaxed text-foreground/90 sm:text-lg">
+                      {s.body}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+
+          {study.pullQuote && (
+            <section className="relative py-12 md:py-16">
+              <div className="mx-auto max-w-3xl px-6 text-center">
+                <p className="font-display text-2xl italic leading-relaxed text-gold-metallic sm:text-3xl md:text-4xl">
+                  "{study.pullQuote}"
+                </p>
+              </div>
+            </section>
+          )}
+
           <section className="relative py-12 md:py-16">
             <div className="mx-auto grid max-w-5xl gap-6 px-6 md:grid-cols-3">
               {study.challenge && <StorySection label="Challenge" body={study.challenge} />}
@@ -164,8 +206,11 @@ function CaseStudyDetail() {
 
           <section className="relative py-16">
             <div className="mx-auto max-w-3xl px-6 text-center">
+              <p className="mb-6 font-display text-2xl text-foreground sm:text-3xl">
+                Have a spec this exact? Let's talk.
+              </p>
               <Link to="/contact" className="inline-flex items-center justify-center rounded-full bg-gradient-to-b from-[oklch(0.92_0.14_88)] to-[oklch(0.7_0.13_75)] px-8 py-3.5 text-sm font-medium uppercase tracking-[0.25em] text-black shadow-[0_10px_40px_-8px_oklch(0.82_0.14_86_/_0.6)] transition-transform hover:scale-[1.02]">
-                Start something similar
+                Start a project
               </Link>
             </div>
           </section>
@@ -183,5 +228,14 @@ function StorySection({ label, body }: { label: string; body: string }) {
         <p className="mt-4 text-sm leading-relaxed text-foreground/90">{body}</p>
       </div>
     </TiltCard>
+  );
+}
+
+function MetaItem({ label, value }: { label: string; value: string }) {
+  return (
+    <div>
+      <p className="text-[10px] uppercase tracking-[0.35em] text-muted-foreground">{label}</p>
+      <p className="mt-2 text-sm text-foreground sm:text-base">{value}</p>
+    </div>
   );
 }
