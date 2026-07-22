@@ -114,12 +114,19 @@ export function Projects({ limit, showMore = false }: { limit?: number; showMore
           ))}
         </div>
         {showMore && (
-          <div className="mt-14 flex justify-center">
+          <div className="mt-14 flex flex-col sm:flex-row items-stretch sm:items-center justify-center gap-3 sm:gap-4">
             <Link
               to="/work"
               className="group inline-flex items-center gap-3 rounded-full border border-[oklch(0.82_0.14_86_/_0.4)] px-7 py-3 text-xs uppercase tracking-[0.3em] text-foreground transition-all hover:bg-[oklch(0.82_0.14_86_/_0.08)] hover:shadow-[0_0_30px_oklch(0.82_0.14_86_/_0.35)]"
             >
               See all work
+              <span className="transition-transform group-hover:translate-x-1" aria-hidden>→</span>
+            </Link>
+            <Link
+              to="/case-studies"
+              className="group inline-flex items-center justify-center gap-3 rounded-full bg-gradient-to-b from-[oklch(0.92_0.14_88)] to-[oklch(0.7_0.13_75)] px-7 py-3 text-xs uppercase tracking-[0.3em] text-black shadow-[0_10px_40px_-8px_oklch(0.82_0.14_86_/_0.6)] transition-transform hover:scale-[1.02]"
+            >
+              Read case studies
               <span className="transition-transform group-hover:translate-x-1" aria-hidden>→</span>
             </Link>
           </div>
