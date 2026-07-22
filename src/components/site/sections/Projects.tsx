@@ -4,6 +4,7 @@ import sentinel from "@/assets/projects/sentinel.jpg";
 import meridian from "@/assets/projects/meridian.jpg";
 import orbit from "@/assets/projects/orbit.jpg";
 import lumen from "@/assets/projects/lumen.jpg";
+import trenfotballCover from "@/assets/case-studies/trenfotball-cover.png.asset.json";
 
 const projects = [
   {
@@ -13,7 +14,8 @@ const projects = [
     pitch: "A video-driven training platform for a Norwegian football coaching business. Custom video pipeline, structured session library, and a CMS the client manages themselves.",
     outcomes: ["Next.js and TypeScript throughout", "Vimeo-backed video delivery", "Client-managed content, no developer dependency"],
     tags: ["Next.js", "TypeScript", "Vimeo API", "Tailwind"],
-    image: meridian,
+    image: trenfotballCover.url,
+    caseStudy: "trenfotball" as const,
   },
   {
     title: "Sentinel AI",
