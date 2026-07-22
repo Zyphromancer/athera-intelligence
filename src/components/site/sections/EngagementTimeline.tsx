@@ -33,18 +33,18 @@ const phases = [
 
 export function EngagementTimeline() {
   return (
-    <section className="relative py-32">
+    <section className="relative py-16 md:py-24 lg:py-32">
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px gold-hairline" />
       <div className="mx-auto max-w-5xl px-6">
         <div className="mx-auto max-w-2xl text-center">
-          <p className="text-xs uppercase tracking-[0.5em] text-[oklch(0.82_0.14_86)]">Timeline</p>
-          <h2 className="mt-4 font-display text-4xl text-gold-metallic md:text-5xl">Eight weeks, four phases</h2>
+          <p className="text-[10px] sm:text-xs uppercase tracking-[0.35em] sm:tracking-[0.5em] text-[oklch(0.82_0.14_86)]">Timeline</p>
+          <h2 className="mt-4 font-display text-3xl sm:text-4xl text-gold-metallic md:text-5xl">Six weeks, four phases</h2>
           <p className="mt-4 text-muted-foreground">Every week has a clear deliverable and a demo. No black boxes.</p>
         </div>
-        <ol className="relative mt-16 space-y-8">
+        <ol className="relative mt-12 sm:mt-16 space-y-6 sm:space-y-8">
           <div aria-hidden className="pointer-events-none absolute left-6 top-2 bottom-2 w-px bg-gradient-to-b from-transparent via-[oklch(0.82_0.14_86_/_0.35)] to-transparent md:left-8" />
           {phases.map((p) => (
-            <li key={p.label} className="relative pl-16 md:pl-20">
+            <li key={p.label} className="relative pl-14 sm:pl-16 md:pl-20">
               <span
                 aria-hidden
                 className="absolute left-4 top-6 grid h-5 w-5 place-items-center rounded-full border border-[oklch(0.82_0.14_86_/_0.6)] bg-background shadow-[0_0_20px_oklch(0.82_0.14_86_/_0.5)] md:left-6"
@@ -52,12 +52,12 @@ export function EngagementTimeline() {
                 <span className="h-2 w-2 rounded-full bg-[oklch(0.82_0.14_86)]" />
               </span>
               <TiltCard intensity={4}>
-                <div className="p-8">
+                <div className="p-6 sm:p-8">
                   <div className="flex flex-wrap items-baseline justify-between gap-3">
                     <span className="text-xs uppercase tracking-[0.35em] text-[oklch(0.82_0.14_86)]">{p.label}</span>
                     <span className="text-[10px] uppercase tracking-[0.3em] text-muted-foreground">{p.who}</span>
                   </div>
-                  <h3 className="mt-2 font-display text-2xl text-foreground">{p.title}</h3>
+                  <h3 className="mt-2 font-display text-xl sm:text-2xl text-foreground">{p.title}</h3>
                   <div className="mt-3 h-px w-16 bg-[oklch(0.82_0.14_86_/_0.5)]" />
                   <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{p.body}</p>
                   <ul className="mt-6 flex flex-wrap gap-2">

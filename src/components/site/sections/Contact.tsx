@@ -17,18 +17,18 @@ export function Contact() {
   }
 
   return (
-    <section id="contact" className="relative py-32">
+    <section id="contact" className="relative overflow-hidden py-16 md:py-24 lg:py-32">
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px gold-hairline" />
-      <div className="pointer-events-none absolute right-1/4 top-1/2 h-[500px] w-[500px] -translate-y-1/2 rounded-full bg-[oklch(0.82_0.14_86)] opacity-[0.1] blur-[160px]" />
+      <div className="pointer-events-none absolute right-1/4 top-1/2 h-[280px] w-[280px] md:h-[500px] md:w-[500px] -translate-y-1/2 rounded-full bg-[oklch(0.82_0.14_86)] opacity-[0.1] blur-[140px]" />
       <div className="mx-auto max-w-4xl px-6">
         <div className="text-center">
-          <p className="text-xs uppercase tracking-[0.5em] text-[oklch(0.82_0.14_86)]">Let's talk</p>
-          <h2 className="mt-4 font-display text-5xl text-gold-metallic md:text-6xl">Start a project</h2>
+          <p className="text-[10px] sm:text-xs uppercase tracking-[0.35em] sm:tracking-[0.5em] text-[oklch(0.82_0.14_86)]">Let's talk</p>
+          <h2 className="mt-4 font-display text-4xl text-gold-metallic sm:text-5xl md:text-6xl">Start a project</h2>
           <p className="mt-4 text-muted-foreground">Tell us what you're building. We'll reply within one business day.</p>
         </div>
-        <div className="mt-16">
+        <div className="mt-12 sm:mt-16">
           <TiltCard intensity={4}>
-            <form onSubmit={onSubmit} className="grid gap-6 p-8 sm:p-12">
+            <form onSubmit={onSubmit} className="grid gap-6 p-6 sm:p-10 md:p-12">
               <div className="grid gap-6 sm:grid-cols-2">
                 <Field label="Name" name="name" required />
                 <Field label="Email" name="email" type="email" required />

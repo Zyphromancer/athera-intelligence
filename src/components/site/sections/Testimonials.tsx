@@ -10,17 +10,17 @@ const quotes = [
 export function Testimonials({ limit, showMore = false }: { limit?: number; showMore?: boolean } = {}) {
   const items = typeof limit === "number" ? quotes.slice(0, limit) : quotes;
   return (
-    <section id="testimonials" className="relative py-32">
+    <section id="testimonials" className="relative py-16 md:py-24 lg:py-32">
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px gold-hairline" />
       <div className="mx-auto max-w-7xl px-6">
         <div className="mx-auto max-w-2xl text-center">
-          <p className="text-xs uppercase tracking-[0.5em] text-[oklch(0.82_0.14_86)]">How we work</p>
-          <h2 className="mt-4 font-display text-5xl text-gold-metallic md:text-6xl">Testimonials</h2>
+          <p className="text-[10px] sm:text-xs uppercase tracking-[0.35em] sm:tracking-[0.5em] text-[oklch(0.82_0.14_86)]">How we work</p>
+          <h2 className="mt-4 font-display text-4xl text-gold-metallic sm:text-5xl md:text-6xl">Testimonials</h2>
         </div>
-        <div className={`mt-16 grid gap-6 ${items.length >= 3 ? "lg:grid-cols-3" : "md:grid-cols-2"}`}>
+        <div className={`mt-12 sm:mt-16 grid gap-5 sm:gap-6 ${items.length >= 3 ? "md:grid-cols-2 lg:grid-cols-3" : "md:grid-cols-2"}`}>
           {items.map((q) => (
             <TiltCard key={q.title}>
-              <div className="flex h-full flex-col p-8">
+              <div className="flex h-full flex-col p-6 sm:p-8">
                 <span aria-hidden className="font-display text-6xl leading-none text-gold-metallic">“</span>
                 <p className="mt-2 flex-1 text-base leading-relaxed text-foreground/90">{q.body}</p>
                 <div className="mt-8 border-t border-[oklch(0.82_0.14_86_/_0.15)] pt-4">
