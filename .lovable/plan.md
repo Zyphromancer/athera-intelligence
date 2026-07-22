@@ -1,32 +1,79 @@
-## Plan
+## Goal
 
-1. **Rebuild the Projects section with real, readable content**
-   - Keep the four project categories: AI detection system, website dev, app dev, AI dev.
-   - Each card shows: project name, category tag, one-line pitch, 3 measurable outcomes (with real numbers), tech stack chips, and a "View case" link.
-   - Redesign card layout so text is the hero: large project name, gold hairline divider, structured outcome list — not just an image with a caption.
+Keep the home page mostly intact — trim each heavy section down to a teaser with a "see more" link into a deeper page. Add the new subpages, the `/example` engagement page, and prominent home CTAs to the key routes.
 
-2. **Replace project images with premium, text-legible mockups (AI-generated, high quality)**
-   - Use `google/gemini-3-pro-image` (premium tier) since it renders text far more reliably than the earlier models. Prompts will specify short, real English words at large sizes.
-   - Target compositions:
-     - **Sentinel AI**: dark forensic UI panel showing a face with an "AUTHENTIC 96%" score badge, small labeled bars ("Face", "Audio", "Metadata"), gold accents.
-     - **Meridian**: laptop mockup of a dark financial site with clear "MERIDIAN CAPITAL" wordmark, nav ("About  Insights  Contact"), and a hero headline.
-     - **Orbit**: two phones side by side, one showing "ORBIT" splash + "Today's Workout", the other a stat screen with "12,480 steps" and "Heart 72 bpm".
-     - **Lumen**: dark enterprise assistant UI with visible "LUMEN" wordmark, a search bar reading "Ask your knowledge base…", and a cited answer block.
-   - All text kept short, high-contrast, in Inter/SF-style sans-serif so it renders cleanly.
+## Home page — teaser pattern
 
-3. **Rebuild Before & After as premium design-audit visuals with readable text**
-   - Generate new before/after images with `gemini-3-pro-image`, prompts written to keep text minimal and legible (real short words, not lorem-ipsum shapes).
-   - Three comparisons:
-     - **Corporate site**: BEFORE = 2010s blue banking template with headline "Welcome to First National", cluttered widgets. AFTER = dark editorial layout, headline "Banking, refined.", gold accents.
-     - **SaaS dashboard**: BEFORE = bright cluttered admin with labels "Users / Revenue / Tickets" and dense tables. AFTER = dark focused dashboard, big KPIs "MRR $184K", clean gold charts.
-     - **Mobile app**: BEFORE = pastel restaurant app labeled "Bella's Kitchen" with cartoon food. AFTER = dark premium app "MAISON" with plated dish photo, "Reserve a table" CTA.
-   - Keep the existing draggable slider component; only swap the images and captions.
+The home page stays the anchor. Every section that currently shows a full grid gets trimmed to 1–2 items plus a gold "see more" link. No section is removed outright.
 
-4. **Polish and verify**
-   - Update card copy so every card reads as a real case study a client would recognise.
-   - Load the preview, scroll through Projects and Before/After, and confirm: all 4 project cards render with images, all 3 comparisons render, text in the generated images is legible and on-brand.
+Home order (unchanged except for trims and two new bits):
 
-### Technical notes
-- Regenerate 4 project JPGs (`src/assets/projects/*.jpg`) and 6 before/after JPGs (`src/assets/before-after/*.jpg`) using the premium image model with prompts engineered for text legibility (short words, large type, high contrast, sans-serif).
-- Update `Projects.tsx` layout and copy; update `BeforeAfterSection.tsx` captions to match new visuals.
-- No changes to routing, theme tokens, or the intro animation.
+1. Intro animation
+2. Hero — **add secondary CTA** "See an example engagement" → `/example`
+3. Services (unchanged)
+4. Signal (unchanged)
+5. **Projects — trim to 2 featured** + "See all work →" link to `/work`
+6. **Before / After — keep only 1 slider** (the bank one) + "See more transformations →" link to `/work#before-after`
+7. Testimonials — **trim to 2 quotes** + "Read more →" link to `/trust` (or keep 3, small trim)
+8. **NEW: Explore band** — 3 tilt cards linking to the top subpages (see below)
+9. **FAQ — keep top 3 questions** + "See all FAQs →" link to `/contact#faq`
+10. Contact form (unchanged, or optionally trimmed to a CTA card that links to `/contact` — default is keep it)
+11. Footer
+
+## New "Explore" band on home
+
+Three tilt cards, gold-accented, sit between Testimonials and FAQ:
+
+- **See a real engagement** → `/example` — badge "Timeline & price"
+- **View all our work** → `/work` — badge "Case studies + before/after"
+- **How we work** → `/approach` — badge "Methodology"
+
+Final section CTAs on home also link out: "Book a discovery call" → `/contact`, with a secondary "or see an example engagement first" → `/example`.
+
+## New routes
+
+```text
+/work        Full Projects grid + all Before/After sliders
+/approach    Methodology, process, engagement models, guarantees
+/example     NEW — mid-range project walkthrough
+/trust       Client logos (placeholders), certifications, team credentials, full testimonials
+/insights    3–4 article stubs (no detail routes yet)
+/contact     Contact form + full FAQ
+```
+
+Nav links: Work · Approach · Example · Trust · Insights · Contact. Gold underline on active.
+
+## `/example` page — mid-range engagement
+
+1. **Header** — "A mid-range engagement, end to end." Sub: 6–10 week builds, one product surface, one team.
+2. **The brief** — fictional Series A fintech needing a customer portal (auth, dashboard, Stripe billing).
+3. **Scope card** — design system, 8 screens, auth, billing, admin, analytics, deployment.
+4. **Timeline** — vertical gold-accented timeline, 4 phases:
+   - Week 1 — Discovery & design system
+   - Weeks 2–4 — Core build (auth, dashboard, billing)
+   - Weeks 5–7 — Admin, analytics, polish
+   - Week 8 — QA, launch, handover
+5. **Price card** — **€28,000–€38,000** fixed-scope, what's in/out, 30/40/30 schedule, "indicative range, final quote after discovery" note.
+6. **Also available** — smaller cards: Retainer (from €4.5k/mo) and Staff augmentation (from €8k/mo per engineer).
+7. **CTA** — "Book a discovery call" → `/contact`.
+
+## Technical notes
+
+- New route files under `src/routes/`: `work.tsx`, `approach.tsx`, `example.tsx`, `trust.tsx`, `insights.tsx`, `contact.tsx`. Each with its own `head()` (unique title/description/og).
+- Existing section components stay authoritative. Home imports them with a `variant="teaser"` prop (or a `limit` prop) so `Projects`, `BeforeAfterSection`, `Testimonials`, and `FAQ` render either the full grid or the trimmed version. `/work`, `/contact`, `/trust` re-mount the same components with full data — no duplicated markup.
+- New home component `ExploreBand.tsx` for the 3-card row.
+- New `/example` components: `EngagementTimeline.tsx`, `PriceCard.tsx`.
+- `SiteNav.tsx`: real `<Link to="...">` for each new route.
+- Intro animation stays on `/` only.
+- Build check with tsgo; walk every home CTA to confirm it lands on the right route.
+
+## Out of scope
+
+- Real blog CMS / MDX for insights
+- Careers page
+- Real client logos on `/trust` (placeholder wordmarks until you provide them)
+
+## Open questions
+
+1. Currency for the price example — **EUR**, USD, or something else?
+2. `/trust` — placeholder wordmarks for now, or leave logo wall empty until you supply real clients?
