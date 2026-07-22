@@ -19,6 +19,7 @@ import { Route as ApproachRouteImport } from './routes/approach'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CaseStudiesSlugRouteImport } from './routes/case-studies.$slug'
 import { Route as ApiContactRouteImport } from './routes/api/contact'
+import { Route as ApiBookACallRouteImport } from './routes/api/book-a-call'
 import { Route as LovableEmailTransactionalPreviewRouteImport } from './routes/lovable/email/transactional/preview'
 import { Route as LovableEmailAuthWebhookRouteImport } from './routes/lovable/email/auth/webhook'
 import { Route as LovableEmailAuthPreviewRouteImport } from './routes/lovable/email/auth/preview'
@@ -73,6 +74,11 @@ const ApiContactRoute = ApiContactRouteImport.update({
   path: '/api/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiBookACallRoute = ApiBookACallRouteImport.update({
+  id: '/api/book-a-call',
+  path: '/api/book-a-call',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LovableEmailTransactionalPreviewRoute =
   LovableEmailTransactionalPreviewRouteImport.update({
     id: '/lovable/email/transactional/preview',
@@ -99,6 +105,7 @@ export interface FileRoutesByFullPath {
   '/insights': typeof InsightsRoute
   '/trust': typeof TrustRoute
   '/work': typeof WorkRoute
+  '/api/book-a-call': typeof ApiBookACallRoute
   '/api/contact': typeof ApiContactRoute
   '/case-studies/$slug': typeof CaseStudiesSlugRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
@@ -114,6 +121,7 @@ export interface FileRoutesByTo {
   '/insights': typeof InsightsRoute
   '/trust': typeof TrustRoute
   '/work': typeof WorkRoute
+  '/api/book-a-call': typeof ApiBookACallRoute
   '/api/contact': typeof ApiContactRoute
   '/case-studies/$slug': typeof CaseStudiesSlugRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
@@ -130,6 +138,7 @@ export interface FileRoutesById {
   '/insights': typeof InsightsRoute
   '/trust': typeof TrustRoute
   '/work': typeof WorkRoute
+  '/api/book-a-call': typeof ApiBookACallRoute
   '/api/contact': typeof ApiContactRoute
   '/case-studies/$slug': typeof CaseStudiesSlugRoute
   '/lovable/email/auth/preview': typeof LovableEmailAuthPreviewRoute
@@ -147,6 +156,7 @@ export interface FileRouteTypes {
     | '/insights'
     | '/trust'
     | '/work'
+    | '/api/book-a-call'
     | '/api/contact'
     | '/case-studies/$slug'
     | '/lovable/email/auth/preview'
@@ -162,6 +172,7 @@ export interface FileRouteTypes {
     | '/insights'
     | '/trust'
     | '/work'
+    | '/api/book-a-call'
     | '/api/contact'
     | '/case-studies/$slug'
     | '/lovable/email/auth/preview'
@@ -177,6 +188,7 @@ export interface FileRouteTypes {
     | '/insights'
     | '/trust'
     | '/work'
+    | '/api/book-a-call'
     | '/api/contact'
     | '/case-studies/$slug'
     | '/lovable/email/auth/preview'
@@ -193,6 +205,7 @@ export interface RootRouteChildren {
   InsightsRoute: typeof InsightsRoute
   TrustRoute: typeof TrustRoute
   WorkRoute: typeof WorkRoute
+  ApiBookACallRoute: typeof ApiBookACallRoute
   ApiContactRoute: typeof ApiContactRoute
   LovableEmailAuthPreviewRoute: typeof LovableEmailAuthPreviewRoute
   LovableEmailAuthWebhookRoute: typeof LovableEmailAuthWebhookRoute
@@ -271,6 +284,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiContactRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/book-a-call': {
+      id: '/api/book-a-call'
+      path: '/api/book-a-call'
+      fullPath: '/api/book-a-call'
+      preLoaderRoute: typeof ApiBookACallRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/lovable/email/transactional/preview': {
       id: '/lovable/email/transactional/preview'
       path: '/lovable/email/transactional/preview'
@@ -316,6 +336,7 @@ const rootRouteChildren: RootRouteChildren = {
   InsightsRoute: InsightsRoute,
   TrustRoute: TrustRoute,
   WorkRoute: WorkRoute,
+  ApiBookACallRoute: ApiBookACallRoute,
   ApiContactRoute: ApiContactRoute,
   LovableEmailAuthPreviewRoute: LovableEmailAuthPreviewRoute,
   LovableEmailAuthWebhookRoute: LovableEmailAuthWebhookRoute,

@@ -5,15 +5,31 @@ import { TiltCard } from "@/components/site/TiltCard";
 export function Contact() {
   const [submitting, setSubmitting] = useState(false);
 
-  function onSubmit(e: FormEvent<HTMLFormElement>) {
+  async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setSubmitting(true);
     const form = e.currentTarget;
-    window.setTimeout(() => {
-      setSubmitting(false);
+    const fd = new FormData(form);
+    const payload = {
+      name: String(fd.get("name") ?? ""),
+      email: String(fd.get("email") ?? ""),
+      company: String(fd.get("company") ?? ""),
+      message: String(fd.get("message") ?? ""),
+    };
+    setSubmitting(true);
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      if (!res.ok) throw new Error(String(res.status));
       form.reset();
       toast.success("Message received. We'll be in touch within one business day.");
-    }, 700);
+    } catch {
+      toast.error("Something went wrong. Please email contact@athera-intelligence.com directly.");
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   return (
