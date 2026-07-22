@@ -2,7 +2,7 @@ import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { PageChrome } from "@/components/site/PageChrome";
 import { PageHeader } from "@/components/site/PageHeader";
 import { TiltCard } from "@/components/site/TiltCard";
-import { getCaseStudy } from "@/lib/case-studies";
+import { getCaseStudy, type CaseStudy } from "@/lib/case-studies";
 
 export const Route = createFileRoute("/case-studies/$slug")({
   loader: ({ params }) => {
@@ -50,12 +50,12 @@ export const Route = createFileRoute("/case-studies/$slug")({
 });
 
 function CaseStudyDetail() {
-  const { study } = Route.useLoaderData();
+  const { study } = Route.useLoaderData() as { study: CaseStudy };
 
   return (
     <PageChrome>
       <PageHeader
-        crumb={<Link to="/case-studies" className="hover:text-foreground">Case studies</Link>}
+        crumb="Case studies"
         eyebrow={study.category}
         title={study.title}
         intro={study.summary}
