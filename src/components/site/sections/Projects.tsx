@@ -7,17 +7,28 @@ import lumen from "@/assets/projects/lumen.jpg";
 
 const projects = [
   {
+    title: "TrenFotball",
+    category: "Client work · Sports platform",
+    badge: "Client work",
+    pitch: "A video-driven training platform for a Norwegian football coaching business. Custom video pipeline, structured session library, and a CMS the client manages themselves.",
+    outcomes: ["Next.js and TypeScript throughout", "Vimeo-backed video delivery", "Client-managed content, no developer dependency"],
+    tags: ["Next.js", "TypeScript", "Vimeo API", "Tailwind"],
+    image: meridian,
+  },
+  {
     title: "Sentinel AI",
-    category: "AI detection system",
+    category: "Studio project · In development",
+    badge: "In development",
     pitch: "Real-time forensic engine that scores images, video frames and text for AI-generated content.",
-    outcomes: ["96% precision on the internal benchmark", "Sub-300 ms inference per asset", "12M assets scored in the first month"],
+    outcomes: ["96% precision on the internal benchmark", "Sub-300 ms inference per asset", "In active development"],
     tags: ["Python", "PyTorch", "FastAPI", "Chrome Extension"],
     image: sentinel,
   },
   {
-    title: "Meridian Capital",
-    category: "Website development",
-    pitch: "A refined marketing platform for a private wealth firm — editorial, fast, and CMS-driven.",
+    title: "Meridian",
+    category: "Concept build · Financial services",
+    badge: "Concept",
+    pitch: "A refined marketing platform concept for a private wealth firm — editorial, fast, and CMS-driven.",
     outcomes: ["0.6 s median LCP on 4G", "+38% qualified leads in Q1", "9-language localisation"],
     tags: ["Next.js", "TypeScript", "Headless CMS", "Edge"],
     image: meridian,
@@ -61,7 +72,12 @@ export function Projects({ limit, showMore = false }: { limit?: number; showMore
                   <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[oklch(0.14_0.012_80)] via-transparent to-transparent" />
                 </div>
                 <div className="flex flex-1 flex-col p-8">
-                  <p className="text-xs uppercase tracking-[0.3em] text-[oklch(0.82_0.14_86)]">{p.category}</p>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <p className="text-xs uppercase tracking-[0.3em] text-[oklch(0.82_0.14_86)]">{p.category}</p>
+                    {"badge" in p && p.badge && (
+                      <span className="rounded-full border border-[oklch(0.82_0.14_86_/_0.25)] bg-[oklch(0.82_0.14_86_/_0.05)] px-3 py-1 text-[10px] uppercase tracking-[0.2em] text-[oklch(0.9_0.15_90)]">{p.badge}</span>
+                    )}
+                  </div>
                   <h3 className="mt-2 font-display text-3xl text-foreground">{p.title}</h3>
                   <div className="mt-3 h-px w-16 bg-[oklch(0.82_0.14_86_/_0.5)]" />
                   <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{p.pitch}</p>
