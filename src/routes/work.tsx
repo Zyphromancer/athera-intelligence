@@ -26,7 +26,7 @@ function WorkPage() {
         intro="A closer look at recent engagements — the brief, the outcomes, and the difference before and after."
       />
       <Projects />
-      <BeforeAfterSection />
+      <BeforeAfterSection full />
     </PageChrome>
   );
 }
