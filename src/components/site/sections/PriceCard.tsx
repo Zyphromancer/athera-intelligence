@@ -18,35 +18,35 @@ export function PriceCard() {
   return (
     <section className="relative overflow-hidden py-16 md:py-24 lg:py-32">
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px gold-hairline" />
-      <div className="pointer-events-none absolute left-1/2 top-1/2 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[oklch(0.82_0.14_86)] opacity-[0.08] blur-[160px]" />
+      <div className="pointer-events-none absolute left-1/2 top-1/2 h-[280px] w-[280px] md:h-[500px] md:w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-[oklch(0.82_0.14_86)] opacity-[0.08] blur-[140px]" />
       <div className="mx-auto max-w-5xl px-6">
         <div className="mx-auto max-w-2xl text-center">
-          <p className="text-xs uppercase tracking-[0.5em] text-[oklch(0.82_0.14_86)]">Investment</p>
-          <h2 className="mt-4 font-display text-4xl text-gold-metallic md:text-5xl">A mid-range engagement</h2>
+          <p className="text-[10px] sm:text-xs uppercase tracking-[0.35em] sm:tracking-[0.5em] text-[oklch(0.82_0.14_86)]">Investment</p>
+          <h2 className="mt-4 font-display text-3xl sm:text-4xl text-gold-metallic md:text-5xl">A mid-range engagement</h2>
           <p className="mt-4 text-muted-foreground">Fixed scope, fixed price, honest schedule.</p>
         </div>
 
-        <div className="mt-14">
+        <div className="mt-12 sm:mt-14">
           <TiltCard intensity={5}>
-            <div className="grid gap-10 p-10 md:grid-cols-[1.1fr_1fr] md:p-14">
+            <div className="grid gap-8 p-6 sm:p-10 md:grid-cols-[1.1fr_1fr] md:gap-10 md:p-14">
               <div>
                 <p className="text-xs uppercase tracking-[0.3em] text-[oklch(0.82_0.14_86)]">Fixed-scope build</p>
                 <div className="mt-4 flex items-baseline gap-3">
-                  <span className="font-display text-6xl leading-none text-gold-metallic md:text-7xl">€28k–€38k</span>
+                  <span className="font-display text-5xl leading-none text-gold-metallic sm:text-6xl md:text-7xl">€18k–€26k</span>
                 </div>
                 <p className="mt-4 text-sm leading-relaxed text-muted-foreground">
-                  Eight-week build for a single product surface — the fintech customer portal in this example.
+                  Six-week build for a single product surface — the fintech customer portal in this example.
                   Delivered by a lead engineer, a design lead, and one supporting engineer.
                 </p>
                 <div className="mt-8 rounded-xl border border-[oklch(0.82_0.14_86_/_0.2)] bg-[oklch(0.82_0.14_86_/_0.04)] p-5">
                   <p className="text-[10px] uppercase tracking-[0.3em] text-[oklch(0.82_0.14_86)]">Payment schedule</p>
-                  <div className="mt-3 flex items-center gap-4 text-sm text-foreground/90">
+                  <div className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-2 text-sm text-foreground/90">
                     <span className="font-display text-2xl text-foreground">30%</span>
                     <span className="text-muted-foreground">kickoff</span>
-                    <span aria-hidden className="h-px flex-1 bg-[oklch(0.82_0.14_86_/_0.25)]" />
+                    <span aria-hidden className="hidden sm:block h-px flex-1 bg-[oklch(0.82_0.14_86_/_0.25)]" />
                     <span className="font-display text-2xl text-foreground">40%</span>
                     <span className="text-muted-foreground">mid</span>
-                    <span aria-hidden className="h-px flex-1 bg-[oklch(0.82_0.14_86_/_0.25)]" />
+                    <span aria-hidden className="hidden sm:block h-px flex-1 bg-[oklch(0.82_0.14_86_/_0.25)]" />
                     <span className="font-display text-2xl text-foreground">30%</span>
                     <span className="text-muted-foreground">launch</span>
                   </div>
@@ -93,20 +93,20 @@ export function PriceCard() {
           </TiltCard>
         </div>
 
-        <div className="mt-10 grid gap-6 md:grid-cols-2">
+        <div className="mt-8 sm:mt-10 grid gap-5 sm:gap-6 md:grid-cols-2">
           <TiltCard intensity={4}>
-            <div className="p-8">
+            <div className="p-6 sm:p-8">
               <p className="text-xs uppercase tracking-[0.3em] text-[oklch(0.82_0.14_86)]">Retainer</p>
-              <p className="mt-2 font-display text-3xl text-foreground">from €4.5k / month</p>
+              <p className="mt-2 font-display text-2xl sm:text-3xl text-foreground">from €4.5k / month</p>
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
                 Ongoing iteration, maintenance, and on-call after launch. Predictable capacity, no context loss.
               </p>
             </div>
           </TiltCard>
           <TiltCard intensity={4}>
-            <div className="p-8">
+            <div className="p-6 sm:p-8">
               <p className="text-xs uppercase tracking-[0.3em] text-[oklch(0.82_0.14_86)]">Staff augmentation</p>
-              <p className="mt-2 font-display text-3xl text-foreground">from €8k / month · engineer</p>
+              <p className="mt-2 font-display text-2xl sm:text-3xl text-foreground">from €8k / month · engineer</p>
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
                 Senior engineers embedded into your team for a defined period. Your process, our craft.
               </p>
