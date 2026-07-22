@@ -22,9 +22,9 @@ export function BeforeAfterSection() {
             beforeSrc={bankBefore} afterSrc={bankAfter} beforeAlt="First National Bank legacy website" afterAlt="Northwind refined banking website" />
           <BeforeAfter title="SaaS — analytics dashboard" caption="Cluttered light-mode admin panel rebuilt into a focused dark dashboard."
             beforeSrc={dashBefore} afterSrc={dashAfter} beforeAlt="Legacy Admin Panel dashboard" afterAlt="Athera-style dark analytics dashboard" />
-          <div className="lg:col-span-2 lg:mx-auto lg:w-2/3">
+          <div className="mx-auto w-full max-w-[280px] sm:max-w-xs lg:col-span-2">
             <BeforeAfter title="Restaurant — mobile app" caption="Bella's Kitchen's playful pastel app rebuilt as Maison — a premium fine-dining experience."
-              beforeSrc={restBefore} afterSrc={restAfter} beforeAlt="Bella's Kitchen cartoon restaurant app" afterAlt="Maison premium restaurant app" aspect="3 / 4" />
+              beforeSrc={restBefore} afterSrc={restAfter} beforeAlt="Bella's Kitchen cartoon restaurant app" afterAlt="Maison premium restaurant app" aspect="9 / 19.5" />
           </div>
         </div>
       </div>
