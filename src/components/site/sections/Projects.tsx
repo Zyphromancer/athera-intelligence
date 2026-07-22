@@ -1,4 +1,5 @@
 import { TiltCard } from "@/components/site/TiltCard";
+import { Link } from "@tanstack/react-router";
 import sentinel from "@/assets/projects/sentinel.jpg";
 import meridian from "@/assets/projects/meridian.jpg";
 import orbit from "@/assets/projects/orbit.jpg";
@@ -39,7 +40,8 @@ const projects = [
   },
 ];
 
-export function Projects() {
+export function Projects({ limit, showMore = false }: { limit?: number; showMore?: boolean } = {}) {
+  const items = typeof limit === "number" ? projects.slice(0, limit) : projects;
   return (
     <section id="projects" className="relative py-32">
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px gold-hairline" />
@@ -47,10 +49,10 @@ export function Projects() {
         <div className="mx-auto max-w-2xl text-center">
           <p className="text-xs uppercase tracking-[0.5em] text-[oklch(0.82_0.14_86)]">Selected work</p>
           <h2 className="mt-4 font-display text-5xl text-gold-metallic md:text-6xl">Projects</h2>
-          <p className="mt-4 text-muted-foreground">Four recent engagements across AI, web, and native apps.</p>
+          <p className="mt-4 text-muted-foreground">Recent engagements across AI, web, and native apps.</p>
         </div>
         <div className="mt-16 grid gap-8 md:grid-cols-2">
-          {projects.map((p) => (
+          {items.map((p) => (
             <TiltCard key={p.title} intensity={7}>
               <article className="flex h-full flex-col">
                 <div className="relative overflow-hidden">
@@ -81,6 +83,17 @@ export function Projects() {
             </TiltCard>
           ))}
         </div>
+        {showMore && (
+          <div className="mt-14 flex justify-center">
+            <Link
+              to="/work"
+              className="group inline-flex items-center gap-3 rounded-full border border-[oklch(0.82_0.14_86_/_0.4)] px-7 py-3 text-xs uppercase tracking-[0.3em] text-foreground transition-all hover:bg-[oklch(0.82_0.14_86_/_0.08)] hover:shadow-[0_0_30px_oklch(0.82_0.14_86_/_0.35)]"
+            >
+              See all work
+              <span className="transition-transform group-hover:translate-x-1" aria-hidden>→</span>
+            </Link>
+          </div>
+        )}
       </div>
     </section>
   );
