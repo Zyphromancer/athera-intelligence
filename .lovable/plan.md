@@ -1,30 +1,32 @@
-# Fix: unreadable / nonsense image content
+## Plan
 
-## Root cause
-The current images were generated with the fast tier and prompts that implied UI screenshots (dashboards, websites, apps). Fast image models render fake text as gibberish, which is exactly what you're seeing on the project cards and the before/after screenshots.
+1. **Rebuild the Projects section with real, readable content**
+   - Keep the four project categories: AI detection system, website dev, app dev, AI dev.
+   - Each card shows: project name, category tag, one-line pitch, 3 measurable outcomes (with real numbers), tech stack chips, and a "View case" link.
+   - Redesign card layout so text is the hero: large project name, gold hairline divider, structured outcome list — not just an image with a caption.
 
-## Approach
-Regenerate all 10 images with two rules:
-1. **Use the premium tier** (`premium`), which is the only tier that renders legible text and clean UI.
-2. **Avoid text wherever possible.** Where a "UI" is needed, prompt for abstract/blurred UI, macro shots, textures, or product photography instead of literal screens with copy. Where text is unavoidable (before/after), keep it to a single short brand-style wordmark and lorem-style bars, not sentences.
+2. **Replace project images with premium, text-legible mockups (AI-generated, high quality)**
+   - Use `google/gemini-3-pro-image` (premium tier) since it renders text far more reliably than the earlier models. Prompts will specify short, real English words at large sizes.
+   - Target compositions:
+     - **Sentinel AI**: dark forensic UI panel showing a face with an "AUTHENTIC 96%" score badge, small labeled bars ("Face", "Audio", "Metadata"), gold accents.
+     - **Meridian**: laptop mockup of a dark financial site with clear "MERIDIAN CAPITAL" wordmark, nav ("About  Insights  Contact"), and a hero headline.
+     - **Orbit**: two phones side by side, one showing "ORBIT" splash + "Today's Workout", the other a stat screen with "12,480 steps" and "Heart 72 bpm".
+     - **Lumen**: dark enterprise assistant UI with visible "LUMEN" wordmark, a search bar reading "Ask your knowledge base…", and a cited answer block.
+   - All text kept short, high-contrast, in Inter/SF-style sans-serif so it renders cleanly.
 
-## Images to regenerate
+3. **Rebuild Before & After as premium design-audit visuals with readable text**
+   - Generate new before/after images with `gemini-3-pro-image`, prompts written to keep text minimal and legible (real short words, not lorem-ipsum shapes).
+   - Three comparisons:
+     - **Corporate site**: BEFORE = 2010s blue banking template with headline "Welcome to First National", cluttered widgets. AFTER = dark editorial layout, headline "Banking, refined.", gold accents.
+     - **SaaS dashboard**: BEFORE = bright cluttered admin with labels "Users / Revenue / Tickets" and dense tables. AFTER = dark focused dashboard, big KPIs "MRR $184K", clean gold charts.
+     - **Mobile app**: BEFORE = pastel restaurant app labeled "Bella's Kitchen" with cartoon food. AFTER = dark premium app "MAISON" with plated dish photo, "Reserve a table" CTA.
+   - Keep the existing draggable slider component; only swap the images and captions.
 
-**Projects (4)** — swap literal UI screenshots for premium editorial/conceptual imagery, no readable text:
-- `sentinel.jpg` — Abstract AI-detection visual: dark studio macro of a face fragment overlaid with faint gold wireframe scan lines and particle grid. No text.
-- `meridian.jpg` — Moody architectural shot of a modern corporate lobby in warm gold-and-black tones. No screens, no text.
-- `orbit.jpg` — Cinematic product shot of a smartphone on dark marble with soft gold rim light. Screen shows only an abstract dark gradient, no UI text.
-- `lumen.jpg` — Macro shot of stacked leather-bound books with gold foil edges under a warm spotlight, faint particle overlay. No text.
+4. **Polish and verify**
+   - Update card copy so every card reads as a real case study a client would recognise.
+   - Load the preview, scroll through Projects and Before/After, and confirm: all 4 project cards render with images, all 3 comparisons render, text in the generated images is legible and on-brand.
 
-**Before / After (6)** — premium tier, minimal/no text, so the "before vs after" reads visually (layout, color, polish) instead of via unreadable copy:
-- `bank-before.jpg` / `bank-after.jpg` — Website mockups shown as flat design comps on a dark surface. Before: cluttered 2010s layout with grey blocks and placeholder bars (no readable words). After: refined dark editorial layout with a single short serif wordmark ("Meridian") and gold accents.
-- `dashboard-before.jpg` / `dashboard-after.jpg` — Admin dashboard renders using only charts, sparklines, and bar placeholders — no labels or numbers that need to be legible. Before: harsh light mode, cramped. After: dark, spacious, gold highlights.
-- `restaurant-before.jpg` / `restaurant-after.jpg` — Phone-in-hand product shots. Screens use only photography and abstract shapes, no menu text. Before: pastel cartoonish. After: dark editorial with gold.
-
-## Technical details
-- Tool: `imagegen--generate_image` with `model: "premium"`.
-- Overwrite the existing files at `src/assets/projects/*.jpg` and `src/assets/before-after/*.jpg` so no code changes are needed — imports stay identical.
-- Keep the same dimensions (16:9 for projects and bank/dashboard, 3:4 for restaurant).
-- Prompts will explicitly include "no text, no letters, no words, no logos" for the four project images and the dashboard/restaurant pairs, and limit the bank pair to a single short wordmark.
-
-No component, layout, or copy changes — only the 10 image files are replaced.
+### Technical notes
+- Regenerate 4 project JPGs (`src/assets/projects/*.jpg`) and 6 before/after JPGs (`src/assets/before-after/*.jpg`) using the premium image model with prompts engineered for text legibility (short words, large type, high contrast, sans-serif).
+- Update `Projects.tsx` layout and copy; update `BeforeAfterSection.tsx` captions to match new visuals.
+- No changes to routing, theme tokens, or the intro animation.
