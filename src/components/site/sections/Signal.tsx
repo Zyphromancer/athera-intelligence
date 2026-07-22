@@ -105,18 +105,18 @@ export function Signal() {
   const { ref, inView } = useInView<HTMLDivElement>(0.25);
 
   return (
-    <section id="signal" className="relative overflow-hidden py-32">
+    <section id="signal" className="relative overflow-hidden py-16 md:py-24 lg:py-32">
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px gold-hairline" />
-      <div className="pointer-events-none absolute right-1/4 top-1/3 h-[420px] w-[420px] rounded-full bg-[oklch(0.82_0.14_86)] opacity-[0.07] blur-[160px]" />
+      <div className="pointer-events-none absolute right-1/4 top-1/3 h-[240px] w-[240px] md:h-[420px] md:w-[420px] rounded-full bg-[oklch(0.82_0.14_86)] opacity-[0.07] blur-[140px]" />
 
       <div className="mx-auto max-w-7xl px-6">
         <div className="mx-auto max-w-2xl text-center">
-          <p className="text-xs uppercase tracking-[0.5em] text-[oklch(0.82_0.14_86)]">Signal</p>
-          <h2 className="mt-4 font-display text-5xl text-gold-metallic md:text-6xl">The record, in numbers</h2>
+          <p className="text-[10px] sm:text-xs uppercase tracking-[0.35em] sm:tracking-[0.5em] text-[oklch(0.82_0.14_86)]">Signal</p>
+          <h2 className="mt-4 font-display text-4xl text-gold-metallic sm:text-5xl md:text-6xl">The record, in numbers</h2>
           <p className="mt-4 text-muted-foreground">A live look at what our engagements ship — and what they hold up to in production.</p>
         </div>
 
-        <div ref={ref} className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div ref={ref} className="mt-12 sm:mt-16 grid gap-5 sm:gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {metrics.map((m, i) => (
             <article
               key={m.label}
@@ -138,7 +138,7 @@ export function Signal() {
                   Live
                 </span>
               </div>
-              <div className="mt-6 font-display text-5xl leading-none text-gold-metallic tabular-nums">
+              <div className="mt-6 font-display text-4xl sm:text-5xl leading-none text-gold-metallic tabular-nums">
                 <Counter value={m.value} prefix={m.prefix} suffix={m.suffix} decimals={m.decimals} run={inView} />
               </div>
               <p className="mt-3 text-sm font-medium text-foreground">{m.label}</p>
