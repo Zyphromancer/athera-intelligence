@@ -48,13 +48,21 @@ export function BeforeAfter({ beforeSrc, afterSrc, beforeAlt, afterAlt, title, c
     };
   }, [dragging, updateFromClientX]);
 
-  const clip = mode === "before" ? 0 : mode === "after" ? 100 : pos;
+  // Before layer sits on top of After; clip percentage = width of Before visible from left.
+  // mode "before" => show full Before (clip = 100); mode "after" => hide Before (clip = 0).
+  const clip = mode === "before" ? 100 : mode === "after" ? 0 : pos;
   const handleKey = (e: React.KeyboardEvent) => {
     if (mode !== "slide") return;
     if (e.key === "ArrowLeft") { e.preventDefault(); setPos((p) => Math.max(0, p - 4)); setInteracted(true); }
     if (e.key === "ArrowRight") { e.preventDefault(); setPos((p) => Math.min(100, p + 4)); setInteracted(true); }
     if (e.key === "Home") { e.preventDefault(); setPos(0); }
     if (e.key === "End") { e.preventDefault(); setPos(100); }
+  };
+
+  const selectMode = (m: "before" | "slide" | "after") => {
+    if (m === "slide") setPos(50);
+    setMode(m);
+    setInteracted(true);
   };
 
   return (
@@ -127,7 +135,7 @@ export function BeforeAfter({ beforeSrc, afterSrc, beforeAlt, afterAlt, title, c
               type="button"
               role="tab"
               aria-selected={mode === m}
-              onClick={() => { setMode(m); setInteracted(true); }}
+              onClick={() => selectMode(m)}
               className={`rounded-full px-3 py-1.5 transition-colors ${mode === m ? "bg-[oklch(0.82_0.14_86)] text-black shadow-[0_0_18px_oklch(0.82_0.14_86_/_0.55)]" : "text-[oklch(0.82_0.14_86)] hover:text-[oklch(0.92_0.14_88)]"}`}
             >
               {m === "slide" ? "Compare" : m}
