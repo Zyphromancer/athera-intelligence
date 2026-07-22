@@ -54,15 +54,15 @@ const projects = [
 export function Projects({ limit, showMore = false }: { limit?: number; showMore?: boolean } = {}) {
   const items = typeof limit === "number" ? projects.slice(0, limit) : projects;
   return (
-    <section id="projects" className="relative py-32">
+    <section id="projects" className="relative py-16 md:py-24 lg:py-32">
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px gold-hairline" />
       <div className="mx-auto max-w-7xl px-6">
         <div className="mx-auto max-w-2xl text-center">
-          <p className="text-xs uppercase tracking-[0.5em] text-[oklch(0.82_0.14_86)]">Selected work</p>
-          <h2 className="mt-4 font-display text-5xl text-gold-metallic md:text-6xl">Projects</h2>
+          <p className="text-[10px] sm:text-xs uppercase tracking-[0.35em] sm:tracking-[0.5em] text-[oklch(0.82_0.14_86)]">Selected work</p>
+          <h2 className="mt-4 font-display text-4xl text-gold-metallic sm:text-5xl md:text-6xl">Projects</h2>
           <p className="mt-4 text-muted-foreground">Recent engagements across AI, web, and native apps.</p>
         </div>
-        <div className="mt-16 grid gap-8 md:grid-cols-2">
+        <div className="mt-12 sm:mt-16 grid gap-6 sm:gap-8 md:grid-cols-2">
           {items.map((p) => (
             <TiltCard key={p.title} intensity={7}>
               <article className="flex h-full flex-col">
@@ -71,14 +71,14 @@ export function Projects({ limit, showMore = false }: { limit?: number; showMore
                     className="aspect-[16/9] w-full object-cover transition-transform duration-700 group-hover:scale-[1.03]" />
                   <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[oklch(0.14_0.012_80)] via-transparent to-transparent" />
                 </div>
-                <div className="flex flex-1 flex-col p-8">
+                <div className="flex flex-1 flex-col p-6 sm:p-8">
                   <div className="flex flex-wrap items-center gap-2">
                     <p className="text-xs uppercase tracking-[0.3em] text-[oklch(0.82_0.14_86)]">{p.category}</p>
                     {"badge" in p && p.badge && (
                       <span className="rounded-full border border-[oklch(0.82_0.14_86_/_0.25)] bg-[oklch(0.82_0.14_86_/_0.05)] px-3 py-1 text-[10px] uppercase tracking-[0.2em] text-[oklch(0.9_0.15_90)]">{p.badge}</span>
                     )}
                   </div>
-                  <h3 className="mt-2 font-display text-3xl text-foreground">{p.title}</h3>
+                  <h3 className="mt-2 font-display text-2xl sm:text-3xl text-foreground">{p.title}</h3>
                   <div className="mt-3 h-px w-16 bg-[oklch(0.82_0.14_86_/_0.5)]" />
                   <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{p.pitch}</p>
                   <ul className="mt-6 space-y-2">
