@@ -1,10 +1,11 @@
 import { BeforeAfter } from "@/components/site/BeforeAfter";
+import { Link } from "@tanstack/react-router";
 import bankBefore from "@/assets/before-after/bank-before.jpg";
 import bankAfter from "@/assets/before-after/bank-after.jpg";
 import dashBefore from "@/assets/before-after/dashboard-before.jpg";
 import dashAfter from "@/assets/before-after/dashboard-after.jpg";
 
-export function BeforeAfterSection() {
+export function BeforeAfterSection({ limit, showMore = false }: { limit?: number; showMore?: boolean } = {}) {
   return (
     <section id="before-after" className="relative py-32">
       <div className="pointer-events-none absolute inset-x-0 top-0 h-px gold-hairline" />
@@ -15,12 +16,26 @@ export function BeforeAfterSection() {
           <h2 className="mt-4 font-display text-5xl text-gold-metallic md:text-6xl">Before &amp; After</h2>
           <p className="mt-4 text-muted-foreground">Drag the divider on each project to see what changed.</p>
         </div>
-        <div className="mt-16 grid gap-12 lg:grid-cols-2">
+        <div className={`mt-16 grid gap-12 ${limit === 1 ? "mx-auto max-w-3xl" : "lg:grid-cols-2"}`}>
           <BeforeAfter title="Regional bank — homepage" caption="From a dated 2012 template to a refined editorial identity."
             beforeSrc={bankBefore} afterSrc={bankAfter} beforeAlt="First National Bank legacy website" afterAlt="Northwind refined banking website" />
-          <BeforeAfter title="SaaS — analytics dashboard" caption="Cluttered light-mode admin panel rebuilt into a focused dark dashboard."
-            beforeSrc={dashBefore} afterSrc={dashAfter} beforeAlt="Legacy Admin Panel dashboard" afterAlt="Athera-style dark analytics dashboard" />
+          {limit !== 1 && (
+            <BeforeAfter title="SaaS — analytics dashboard" caption="Cluttered light-mode admin panel rebuilt into a focused dark dashboard."
+              beforeSrc={dashBefore} afterSrc={dashAfter} beforeAlt="Legacy Admin Panel dashboard" afterAlt="Athera-style dark analytics dashboard" />
+          )}
         </div>
+        {showMore && (
+          <div className="mt-14 flex justify-center">
+            <Link
+              to="/work"
+              hash="before-after"
+              className="group inline-flex items-center gap-3 rounded-full border border-[oklch(0.82_0.14_86_/_0.4)] px-7 py-3 text-xs uppercase tracking-[0.3em] text-foreground transition-all hover:bg-[oklch(0.82_0.14_86_/_0.08)] hover:shadow-[0_0_30px_oklch(0.82_0.14_86_/_0.35)]"
+            >
+              More transformations
+              <span className="transition-transform group-hover:translate-x-1" aria-hidden>→</span>
+            </Link>
+          </div>
+        )}
       </div>
     </section>
   );
