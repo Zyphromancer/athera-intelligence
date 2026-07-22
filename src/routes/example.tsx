@@ -11,7 +11,7 @@ export const Route = createFileRoute("/example")({
   head: () => ({
     meta: [
       { title: "Example engagement — Athera Intelligence" },
-      { name: "description", content: "A mid-range engagement, end to end — brief, scope, four-phase timeline, and an honest price example from €28k–€38k." },
+      { name: "description", content: "A mid-range engagement, end to end — brief, scope, four-phase timeline, and an honest price example from €18k–€26k." },
       { property: "og:title", content: "Example engagement — Athera Intelligence" },
       { property: "og:description", content: "See what a mid-range Athera project looks like: scope, timeline, and price." },
     ],
