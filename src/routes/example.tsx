@@ -53,7 +53,7 @@ function ExamplePage() {
                   dashboard, self-serve billing on Stripe, and an internal admin surface — in one quarter.
                 </p>
                 <ul className="mt-6 space-y-2 text-xs uppercase tracking-[0.25em] text-muted-foreground">
-                  <li>· 8-week build</li>
+                  <li>· 6-week build</li>
                   <li>· 3-person team</li>
                   <li>· One product surface</li>
                 </ul>

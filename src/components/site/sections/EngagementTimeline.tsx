@@ -38,7 +38,7 @@ export function EngagementTimeline() {
       <div className="mx-auto max-w-5xl px-6">
         <div className="mx-auto max-w-2xl text-center">
           <p className="text-[10px] sm:text-xs uppercase tracking-[0.35em] sm:tracking-[0.5em] text-[oklch(0.82_0.14_86)]">Timeline</p>
-          <h2 className="mt-4 font-display text-3xl sm:text-4xl text-gold-metallic md:text-5xl">Eight weeks, four phases</h2>
+          <h2 className="mt-4 font-display text-3xl sm:text-4xl text-gold-metallic md:text-5xl">Six weeks, four phases</h2>
           <p className="mt-4 text-muted-foreground">Every week has a clear deliverable and a demo. No black boxes.</p>
         </div>
         <ol className="relative mt-12 sm:mt-16 space-y-6 sm:space-y-8">

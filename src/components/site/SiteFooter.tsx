@@ -1,9 +1,9 @@
 export function SiteFooter() {
   return (
-    <footer className="relative mt-32 border-t border-[oklch(0.82_0.14_86_/_0.15)]">
+    <footer className="relative mt-20 sm:mt-24 md:mt-32 border-t border-[oklch(0.82_0.14_86_/_0.15)]">
       <div className="absolute inset-x-0 top-0 h-px gold-hairline" />
-      <div className="mx-auto max-w-7xl px-6 py-14">
-        <div className="grid gap-10 md:grid-cols-3">
+      <div className="mx-auto max-w-7xl px-6 py-10 sm:py-14">
+        <div className="grid gap-8 sm:gap-10 sm:grid-cols-2 md:grid-cols-3">
           <div>
             <p className="font-display text-2xl tracking-[0.35em] text-gold-metallic">ATHERA</p>
             <p className="mt-3 text-sm text-muted-foreground max-w-xs">
