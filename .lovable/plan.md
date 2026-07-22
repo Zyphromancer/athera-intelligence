@@ -1,79 +1,69 @@
-## Goal
+Content-only edits. No changes to layout, typography, colour tokens, animations, or component structure beyond adding a small `Badge` element that reuses the existing tech-tag styling.
 
-Keep the home page mostly intact — trim each heavy section down to a teaser with a "see more" link into a deeper page. Add the new subpages, the `/example` engagement page, and prominent home CTAs to the key routes.
+## 1. `src/components/site/sections/Projects.tsx`
 
-## Home page — teaser pattern
+Rewrite the `projects` array (order matters — TrenFotball first) and add an optional `badge` field. Inside the card JSX, render the badge next to the category label using the exact same class string as the existing tech tags (rounded-full, gold border, uppercase tracking) so no new styling is introduced.
 
-The home page stays the anchor. Every section that currently shows a full grid gets trimmed to 1–2 items plus a gold "see more" link. No section is removed outright.
+New array (in order):
 
-Home order (unchanged except for trims and two new bits):
+1. **TrenFotball** — `badge: "Client work"`, label `"Client work · Sports platform"`, description "A video-driven training platform for a Norwegian football coaching business. Custom video pipeline, structured session library, and a CMS the client manages themselves.", bullets ["Next.js and TypeScript throughout", "Vimeo-backed video delivery", "Client-managed content, no developer dependency"], tags ["Next.js", "TypeScript", "Vimeo API", "Tailwind"]. Image: reuse `meridian.jpg` as a temporary placeholder (no new asset generation — content-only change) OR reuse `orbit.jpg`; pick `meridian.jpg` since it reads as a polished product screen.
+2. **Sentinel AI** — `badge: "In development"`, label `"Studio project · In development"`, keep pitch and tags, change last bullet to `"In active development"`.
+3. **Meridian** — `badge: "Concept"`, title `"Meridian"`, label `"Concept build · Financial services"`, description "A refined marketing platform concept for a private wealth firm — editorial, fast, and CMS-driven.", keep bullets and tags.
+4. **Orbit** — unchanged.
+5. **Lumen** — unchanged.
 
-1. Intro animation
-2. Hero — **add secondary CTA** "See an example engagement" → `/example`
-3. Services (unchanged)
-4. Signal (unchanged)
-5. **Projects — trim to 2 featured** + "See all work →" link to `/work`
-6. **Before / After — keep only 1 slider** (the bank one) + "See more transformations →" link to `/work#before-after`
-7. Testimonials — **trim to 2 quotes** + "Read more →" link to `/trust` (or keep 3, small trim)
-8. **NEW: Explore band** — 3 tilt cards linking to the top subpages (see below)
-9. **FAQ — keep top 3 questions** + "See all FAQs →" link to `/contact#faq`
-10. Contact form (unchanged, or optionally trimmed to a CTA card that links to `/contact` — default is keep it)
-11. Footer
+Badge markup (reuses existing tag classes, placed inline with the category eyebrow):
 
-## New "Explore" band on home
-
-Three tilt cards, gold-accented, sit between Testimonials and FAQ:
-
-- **See a real engagement** → `/example` — badge "Timeline & price"
-- **View all our work** → `/work` — badge "Case studies + before/after"
-- **How we work** → `/approach` — badge "Methodology"
-
-Final section CTAs on home also link out: "Book a discovery call" → `/contact`, with a secondary "or see an example engagement first" → `/example`.
-
-## New routes
-
-```text
-/work        Full Projects grid + all Before/After sliders
-/approach    Methodology, process, engagement models, guarantees
-/example     NEW — mid-range project walkthrough
-/trust       Client logos (placeholders), certifications, team credentials, full testimonials
-/insights    3–4 article stubs (no detail routes yet)
-/contact     Contact form + full FAQ
+```tsx
+{p.badge && (
+  <span className="rounded-full border border-[oklch(0.82_0.14_86_/_0.25)] bg-[oklch(0.82_0.14_86_/_0.05)] px-3 py-1 text-[10px] uppercase tracking-[0.2em] text-[oklch(0.9_0.15_90)]">
+    {p.badge}
+  </span>
+)}
 ```
 
-Nav links: Work · Approach · Example · Trust · Insights · Contact. Gold underline on active.
+Homepage uses `<Projects limit={2} />` which will now show TrenFotball + Sentinel — a good honest lead.
 
-## `/example` page — mid-range engagement
+## 2. `src/components/site/sections/BeforeAfterSection.tsx`
 
-1. **Header** — "A mid-range engagement, end to end." Sub: 6–10 week builds, one product surface, one team.
-2. **The brief** — fictional Series A fintech needing a customer portal (auth, dashboard, Stripe billing).
-3. **Scope card** — design system, 8 screens, auth, billing, admin, analytics, deployment.
-4. **Timeline** — vertical gold-accented timeline, 4 phases:
-   - Week 1 — Discovery & design system
-   - Weeks 2–4 — Core build (auth, dashboard, billing)
-   - Weeks 5–7 — Admin, analytics, polish
-   - Week 8 — QA, launch, handover
-5. **Price card** — **€28,000–€38,000** fixed-scope, what's in/out, 30/40/30 schedule, "indicative range, final quote after discovery" note.
-6. **Also available** — smaller cards: Retainer (from €4.5k/mo) and Staff augmentation (from €8k/mo per engineer).
-7. **CTA** — "Book a discovery call" → `/contact`.
+Change only the props passed to the bank `<BeforeAfter>`:
+- `title="Financial services — homepage concept"`
+- `caption="A dated 2012 template reimagined as a refined editorial identity."`
+- `beforeAlt="Dated financial services website"`, `afterAlt="Refined editorial financial services website"`
 
-## Technical notes
+Dashboard slider unchanged.
 
-- New route files under `src/routes/`: `work.tsx`, `approach.tsx`, `example.tsx`, `trust.tsx`, `insights.tsx`, `contact.tsx`. Each with its own `head()` (unique title/description/og).
-- Existing section components stay authoritative. Home imports them with a `variant="teaser"` prop (or a `limit` prop) so `Projects`, `BeforeAfterSection`, `Testimonials`, and `FAQ` render either the full grid or the trimmed version. `/work`, `/contact`, `/trust` re-mount the same components with full data — no duplicated markup.
-- New home component `ExploreBand.tsx` for the 3-card row.
-- New `/example` components: `EngagementTimeline.tsx`, `PriceCard.tsx`.
-- `SiteNav.tsx`: real `<Link to="...">` for each new route.
-- Intro animation stays on `/` only.
-- Build check with tsgo; walk every home CTA to confirm it lands on the right route.
+## 3. `src/components/site/sections/Testimonials.tsx`
 
-## Out of scope
+- Change section eyebrow `"Kind words"` → `"How we work"`.
+- Replace `quotes` array with three trust statements: title + body, no name/role. Reuse the exact card layout:
+  - Keep the big gold `"` mark.
+  - Body text = the statement.
+  - The bottom block (currently name + role) becomes the title in `font-display` + a short qualifier in the gold uppercase style already used for `role`.
+- Data:
+  1. `"Direct with the engineer"` / `"You work with the person building your product. No account managers, no handoffs."`
+  2. `"Fixed price, agreed upfront"` / `"Scope and cost settled before a line of code. No hourly surprises."`
+  3. `"Yours to keep"` / `"Full source, full ownership, documented handover. No lock-in."`
+- Grid already switches to 3 columns when `items.length >= 3` — no layout change needed. Homepage `limit={2}` will show the first two; `/trust` shows all three.
+- Rename the field names in-file from `{quote, name, role}` to `{body, title, tag}` (or similar) so the JSX reads honestly; visual output identical.
 
-- Real blog CMS / MDX for insights
-- Careers page
-- Real client logos on `/trust` (placeholder wordmarks until you provide them)
+## 4. `src/components/site/SiteFooter.tsx`
 
-## Open questions
+- `hello@athera.io` → `contact@athera-intelligence.com`
+- `Remote · Worldwide` → two `<li>` entries: `London, UK` and `Trondheim, Norway`
 
-1. Currency for the price example — **EUR**, USD, or something else?
-2. `/trust` — placeholder wordmarks for now, or leave logo wall empty until you supply real clients?
+## 5. Grep for other occurrences
+
+Content-only sweep for any remaining `hello@athera.io` or `Remote · Worldwide` strings in `src/` (likely only in SiteFooter, but check Contact-related copy and any route metadata). Replace as above. No design changes.
+
+## Files touched
+
+- `src/components/site/sections/Projects.tsx`
+- `src/components/site/sections/BeforeAfterSection.tsx`
+- `src/components/site/sections/Testimonials.tsx`
+- `src/components/site/SiteFooter.tsx`
+- Any other file where the two contact strings appear (verified before editing)
+
+## Not touched
+
+Design tokens, animations, `TiltCard`, `IntroAnimation`, `PageChrome`, nav, routes, images, styles.css, and the `/example` pricing/timeline copy (separate outstanding thread).
