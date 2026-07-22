@@ -1,4 +1,5 @@
 import { CircuitBackdrop } from "@/components/site/CircuitBackdrop";
+import { Link } from "@tanstack/react-router";
 
 export function Hero() {
   return (
@@ -16,13 +17,13 @@ export function Hero() {
           We build custom software, mobile apps, and AI systems for companies that treat their product as their reputation. Corporate craftsmanship, with a modern edge.
         </p>
         <div className="animate-fade-up mt-12 flex flex-wrap items-center justify-center gap-4" style={{ animationDelay: "0.4s" }}>
-          <a href="#contact" className="group relative inline-flex items-center justify-center overflow-hidden rounded-full bg-gradient-to-b from-[oklch(0.92_0.14_88)] to-[oklch(0.7_0.13_75)] px-8 py-3.5 text-sm font-medium uppercase tracking-[0.25em] text-black shadow-[0_10px_40px_-8px_oklch(0.82_0.14_86_/_0.6)] transition-transform hover:scale-[1.02]">
+          <Link to="/contact" className="group relative inline-flex items-center justify-center overflow-hidden rounded-full bg-gradient-to-b from-[oklch(0.92_0.14_88)] to-[oklch(0.7_0.13_75)] px-8 py-3.5 text-sm font-medium uppercase tracking-[0.25em] text-black shadow-[0_10px_40px_-8px_oklch(0.82_0.14_86_/_0.6)] transition-transform hover:scale-[1.02]">
             <span className="relative z-10">Start a project</span>
             <span className="absolute inset-0 -translate-x-full bg-gradient-to-r from-transparent via-white/40 to-transparent transition-transform duration-700 group-hover:translate-x-full" />
-          </a>
-          <a href="#projects" className="inline-flex items-center gap-2 rounded-full border border-[oklch(0.82_0.14_86_/_0.4)] px-8 py-3.5 text-sm uppercase tracking-[0.25em] text-foreground transition-all hover:bg-[oklch(0.82_0.14_86_/_0.08)] hover:shadow-[0_0_30px_oklch(0.82_0.14_86_/_0.35)]">
-            See our work
-          </a>
+          </Link>
+          <Link to="/example" className="inline-flex items-center gap-2 rounded-full border border-[oklch(0.82_0.14_86_/_0.4)] px-8 py-3.5 text-sm uppercase tracking-[0.25em] text-foreground transition-all hover:bg-[oklch(0.82_0.14_86_/_0.08)] hover:shadow-[0_0_30px_oklch(0.82_0.14_86_/_0.35)]">
+            See an example engagement
+          </Link>
         </div>
         <div className="mt-24 flex flex-wrap items-center justify-center gap-x-12 gap-y-4 text-xs uppercase tracking-[0.3em] text-muted-foreground">
           <span>Coding</span><span className="text-[oklch(0.82_0.14_86)]">·</span>
