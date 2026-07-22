@@ -4,6 +4,7 @@ import sentinel from "@/assets/projects/sentinel.jpg";
 import meridian from "@/assets/projects/meridian.jpg";
 import orbit from "@/assets/projects/orbit.jpg";
 import lumen from "@/assets/projects/lumen.jpg";
+import trenfotballCover from "@/assets/case-studies/trenfotball-cover.png.asset.json";
 
 const projects = [
   {
@@ -13,7 +14,8 @@ const projects = [
     pitch: "A video-driven training platform for a Norwegian football coaching business. Custom video pipeline, structured session library, and a CMS the client manages themselves.",
     outcomes: ["Next.js and TypeScript throughout", "Vimeo-backed video delivery", "Client-managed content, no developer dependency"],
     tags: ["Next.js", "TypeScript", "Vimeo API", "Tailwind"],
-    image: meridian,
+    image: trenfotballCover.url,
+    caseStudy: "trenfotball" as const,
   },
   {
     title: "Sentinel AI",
@@ -94,6 +96,18 @@ export function Projects({ limit, showMore = false }: { limit?: number; showMore
                       <span key={t} className="rounded-full border border-[oklch(0.82_0.14_86_/_0.25)] bg-[oklch(0.82_0.14_86_/_0.05)] px-3 py-1 text-[10px] uppercase tracking-[0.2em] text-[oklch(0.9_0.15_90)]">{t}</span>
                     ))}
                   </div>
+                  {"caseStudy" in p && p.caseStudy && (
+                    <div className="mt-6">
+                      <Link
+                        to="/case-studies/$slug"
+                        params={{ slug: p.caseStudy }}
+                        className="inline-flex items-center gap-2 text-xs uppercase tracking-[0.3em] text-[oklch(0.9_0.15_90)] transition-colors hover:text-[oklch(0.95_0.15_90)]"
+                      >
+                        Read case study
+                        <span aria-hidden>→</span>
+                      </Link>
+                    </div>
+                  )}
                 </div>
               </article>
             </TiltCard>
