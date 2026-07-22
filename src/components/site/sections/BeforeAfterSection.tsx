@@ -17,8 +17,8 @@ export function BeforeAfterSection({ limit, showMore = false }: { limit?: number
           <p className="mt-4 text-muted-foreground">Drag the divider on each project to see what changed.</p>
         </div>
         <div className={`mt-16 grid gap-12 ${limit === 1 ? "mx-auto max-w-3xl" : "lg:grid-cols-2"}`}>
-          <BeforeAfter title="Regional bank — homepage" caption="From a dated 2012 template to a refined editorial identity."
-            beforeSrc={bankBefore} afterSrc={bankAfter} beforeAlt="First National Bank legacy website" afterAlt="Northwind refined banking website" />
+          <BeforeAfter title="Financial services — homepage concept" caption="A dated 2012 template reimagined as a refined editorial identity."
+            beforeSrc={bankBefore} afterSrc={bankAfter} beforeAlt="Dated financial services website" afterAlt="Refined editorial financial services website" />
           {limit !== 1 && (
             <BeforeAfter title="SaaS — analytics dashboard" caption="Cluttered light-mode admin panel rebuilt into a focused dark dashboard."
               beforeSrc={dashBefore} afterSrc={dashAfter} beforeAlt="Legacy Admin Panel dashboard" afterAlt="Athera-style dark analytics dashboard" />
