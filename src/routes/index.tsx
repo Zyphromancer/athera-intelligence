@@ -7,6 +7,7 @@ import { Hero } from "@/components/site/sections/Hero";
 import { Services } from "@/components/site/sections/Services";
 import { Projects } from "@/components/site/sections/Projects";
 import { BeforeAfterSection } from "@/components/site/sections/BeforeAfterSection";
+import { Signal } from "@/components/site/sections/Signal";
 import { Testimonials } from "@/components/site/sections/Testimonials";
 import { FAQ } from "@/components/site/sections/FAQ";
 import { Contact } from "@/components/site/sections/Contact";
@@ -34,6 +35,7 @@ function Index() {
           <Services />
           <Projects />
           <BeforeAfterSection />
+          <Signal />
           <Testimonials />
           <FAQ />
           <Contact />
