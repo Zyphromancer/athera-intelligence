@@ -18,13 +18,13 @@ export function BeforeAfterSection() {
           <p className="mt-4 text-muted-foreground">Drag the divider on each project to see what changed.</p>
         </div>
         <div className="mt-16 grid gap-12 lg:grid-cols-2">
-          <BeforeAfter title="Regional bank — landing page" caption="From dated 2010s corporate template to refined dark editorial."
-            beforeSrc={bankBefore} afterSrc={bankAfter} beforeAlt="Dated bank website" afterAlt="Redesigned bank website" />
-          <BeforeAfter title="SaaS — admin dashboard" caption="Cluttered light-mode tables → focused dark dashboard with clear hierarchy."
-            beforeSrc={dashBefore} afterSrc={dashAfter} beforeAlt="Old cluttered dashboard" afterAlt="Modernized dashboard" />
+          <BeforeAfter title="Regional bank — homepage" caption="From a dated 2012 template to a refined editorial identity."
+            beforeSrc={bankBefore} afterSrc={bankAfter} beforeAlt="First National Bank legacy website" afterAlt="Northwind refined banking website" />
+          <BeforeAfter title="SaaS — analytics dashboard" caption="Cluttered light-mode admin panel rebuilt into a focused dark dashboard."
+            beforeSrc={dashBefore} afterSrc={dashAfter} beforeAlt="Legacy Admin Panel dashboard" afterAlt="Athera-style dark analytics dashboard" />
           <div className="lg:col-span-2 lg:mx-auto lg:w-2/3">
-            <BeforeAfter title="Restaurant — mobile app" caption="Playful pastel screens replaced with a premium, editorial dark UI."
-              beforeSrc={restBefore} afterSrc={restAfter} beforeAlt="Old cartoonish restaurant app" afterAlt="Premium restaurant app" aspect="3 / 4" />
+            <BeforeAfter title="Restaurant — mobile app" caption="Bella's Kitchen's playful pastel app rebuilt as Maison — a premium fine-dining experience."
+              beforeSrc={restBefore} afterSrc={restAfter} beforeAlt="Bella's Kitchen cartoon restaurant app" afterAlt="Maison premium restaurant app" aspect="3 / 4" />
           </div>
         </div>
       </div>
