@@ -22,8 +22,9 @@ export function SiteFooter() {
           <div>
             <p className="text-xs uppercase tracking-[0.3em] text-[oklch(0.82_0.14_86)]">Contact</p>
             <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
-              <li>hello@athera.io</li>
-              <li>Remote · Worldwide</li>
+              <li>contact@athera-intelligence.com</li>
+              <li>London, UK</li>
+              <li>Trondheim, Norway</li>
             </ul>
           </div>
         </div>
