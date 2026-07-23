@@ -15,8 +15,9 @@ const ROOT_DOMAIN = "athera-intelligence.com"
 const FROM_DOMAIN = "athera-intelligence.com"
 const SITE_URL = `https://${ROOT_DOMAIN}`
 
-// The SDK handler owns verification, dispatch, and retry semantics; this file
-// owns only the email decisions: subjects, templates, and per-type props.
+// Auth email webhook handler. The SDK handler owns verification, dispatch,
+// and retry semantics; this file owns only the email decisions: subjects,
+// templates, and per-type props.
 const handler = createAuthEmailHandler({
   apiKey: process.env.LOVABLE_API_KEY!,
   from: `${SITE_NAME} <noreply@${FROM_DOMAIN}>`,
