@@ -19,6 +19,9 @@ dist-ssr
 # Wrangler / Cloudflare
 .wrangler/
 .dev.vars
+
+# Lovable platform metadata
+.lovable/
 # Lovable platform metadata
 .lovable/
 
