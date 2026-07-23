@@ -77,7 +77,7 @@ const handler = createAuthEmailHandler({
   },
 })
 
-export const Route = createFileRoute("/lovable/email/auth/webhook")({
+export const Route = createFileRoute("/email/auth/webhook")({
   server: {
     handlers: {
       POST: ({ request }) => handler(request),
