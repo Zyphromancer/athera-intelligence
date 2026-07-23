@@ -22,8 +22,6 @@ dist-ssr
 
 # Lovable platform metadata
 .lovable/
-# Lovable platform metadata
-.lovable/
 
 # Editor directories and files
 .vscode/*
