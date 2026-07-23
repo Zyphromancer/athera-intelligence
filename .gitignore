@@ -20,6 +20,12 @@ dist-ssr
 .wrangler/
 .dev.vars
 
+# TypeScript
+tsconfig.tsbuildinfo
+
+# Lovable platform metadata
+.lovable/
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
