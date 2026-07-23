@@ -19,6 +19,8 @@ dist-ssr
 # Wrangler / Cloudflare
 .wrangler/
 .dev.vars
+# Lovable platform metadata
+.lovable/
 
 # Editor directories and files
 .vscode/*
