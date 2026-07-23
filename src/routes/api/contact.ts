@@ -35,9 +35,9 @@ export const Route = createFileRoute('/api/contact')({
             replyTo: data.email,
             idempotencyKey: `contact-${data.email}-${Date.now()}`,
           })
-        } catch (err) {
+       } catch (err) {
           console.error('contact send failed', err)
-          return Response.json({ error: 'Send failed' }, { status: 502 })
+          return Response.json({ error: 'Send failed', detail: String(err) }, { status: 502 })
         }
         return Response.json({ ok: true })
       },
