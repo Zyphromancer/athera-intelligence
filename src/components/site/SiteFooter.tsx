@@ -7,13 +7,15 @@ export function SiteFooter() {
           <div>
             <p className="font-display text-2xl tracking-[0.35em] text-gold-metallic">ATHERA</p>
             <p className="mt-3 text-sm text-muted-foreground max-w-xs">
-              Engineering intelligent software for companies that treat their product as their reputation.
+              A research-led technology lab, building intelligence around people.
             </p>
           </div>
           <div>
-            <p className="text-xs uppercase tracking-[0.3em] text-[oklch(0.82_0.14_86)]">Studio</p>
+            <p className="text-xs uppercase tracking-[0.3em] text-[oklch(0.82_0.14_86)]">Lab</p>
             <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
-              <li><a href="#services" className="hover:text-foreground">Services</a></li>
+              <li><a href="#research" className="hover:text-foreground">Research</a></li>
+              <li><a href="#products" className="hover:text-foreground">Products</a></li>
+              <li><a href="#partnerships" className="hover:text-foreground">Partnerships</a></li>
               <li><a href="#projects" className="hover:text-foreground">Projects</a></li>
               <li><a href="#before-after" className="hover:text-foreground">Before / After</a></li>
               <li><a href="#faq" className="hover:text-foreground">FAQ</a></li>

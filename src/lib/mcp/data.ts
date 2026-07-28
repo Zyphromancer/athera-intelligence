@@ -24,19 +24,6 @@ export const publicProjects: PublicProject[] = [
     caseStudySlug: "trenfotball",
   },
   {
-    title: "Sentinel AI",
-    category: "Studio project · In development",
-    badge: "In development",
-    pitch:
-      "Real-time forensic engine that scores images, video frames and text for AI-generated content.",
-    outcomes: [
-      "96% precision on the internal benchmark",
-      "Sub-300 ms inference per asset",
-      "In active development",
-    ],
-    tags: ["Python", "PyTorch", "FastAPI", "Chrome Extension"],
-  },
-  {
     title: "Meridian",
     category: "Concept build · Financial services",
     badge: "Concept",
