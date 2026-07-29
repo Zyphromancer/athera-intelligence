@@ -16,6 +16,8 @@ import { Route as ContactRouteImport } from './routes/contact'
 import { Route as ExampleRouteImport } from './routes/example'
 import { Route as InsightsRouteImport } from './routes/insights'
 import { Route as McpRouteImport } from './routes/mcp'
+import { Route as RobotsDottxtRouteImport } from './routes/robots[.]txt'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as TrustRouteImport } from './routes/trust'
 import { Route as WorkRouteImport } from './routes/work'
 import { Route as Char91DotmcpChar93ListToolsRouteImport } from './routes/[.mcp]/list-tools'
@@ -60,6 +62,16 @@ const InsightsRoute = InsightsRouteImport.update({
 const McpRoute = McpRouteImport.update({
   id: '/mcp',
   path: '/mcp',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const RobotsDottxtRoute = RobotsDottxtRouteImport.update({
+  id: '/robots.txt',
+  path: '/robots.txt',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TrustRoute = TrustRouteImport.update({
@@ -125,6 +137,8 @@ export interface FileRoutesByFullPath {
   '/example': typeof ExampleRoute
   '/insights': typeof InsightsRoute
   '/mcp': typeof McpRoute
+  '/robots.txt': typeof RobotsDottxtRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/trust': typeof TrustRoute
   '/work': typeof WorkRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
@@ -144,6 +158,8 @@ export interface FileRoutesByTo {
   '/example': typeof ExampleRoute
   '/insights': typeof InsightsRoute
   '/mcp': typeof McpRoute
+  '/robots.txt': typeof RobotsDottxtRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/trust': typeof TrustRoute
   '/work': typeof WorkRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
@@ -164,6 +180,8 @@ export interface FileRoutesById {
   '/example': typeof ExampleRoute
   '/insights': typeof InsightsRoute
   '/mcp': typeof McpRoute
+  '/robots.txt': typeof RobotsDottxtRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/trust': typeof TrustRoute
   '/work': typeof WorkRoute
   '/.mcp/list-tools': typeof Char91DotmcpChar93ListToolsRoute
@@ -185,6 +203,8 @@ export interface FileRouteTypes {
     | '/example'
     | '/insights'
     | '/mcp'
+    | '/robots.txt'
+    | '/sitemap.xml'
     | '/trust'
     | '/work'
     | '/.mcp/list-tools'
@@ -204,6 +224,8 @@ export interface FileRouteTypes {
     | '/example'
     | '/insights'
     | '/mcp'
+    | '/robots.txt'
+    | '/sitemap.xml'
     | '/trust'
     | '/work'
     | '/.mcp/list-tools'
@@ -223,6 +245,8 @@ export interface FileRouteTypes {
     | '/example'
     | '/insights'
     | '/mcp'
+    | '/robots.txt'
+    | '/sitemap.xml'
     | '/trust'
     | '/work'
     | '/.mcp/list-tools'
@@ -243,6 +267,8 @@ export interface RootRouteChildren {
   ExampleRoute: typeof ExampleRoute
   InsightsRoute: typeof InsightsRoute
   McpRoute: typeof McpRoute
+  RobotsDottxtRoute: typeof RobotsDottxtRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   TrustRoute: typeof TrustRoute
   WorkRoute: typeof WorkRoute
   Char91DotmcpChar93ListToolsRoute: typeof Char91DotmcpChar93ListToolsRoute
@@ -303,6 +329,20 @@ declare module '@tanstack/react-router' {
       path: '/mcp'
       fullPath: '/mcp'
       preLoaderRoute: typeof McpRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/robots.txt': {
+      id: '/robots.txt'
+      path: '/robots.txt'
+      fullPath: '/robots.txt'
+      preLoaderRoute: typeof RobotsDottxtRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/trust': {
@@ -398,6 +438,8 @@ const rootRouteChildren: RootRouteChildren = {
   ExampleRoute: ExampleRoute,
   InsightsRoute: InsightsRoute,
   McpRoute: McpRoute,
+  RobotsDottxtRoute: RobotsDottxtRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   TrustRoute: TrustRoute,
   WorkRoute: WorkRoute,
   Char91DotmcpChar93ListToolsRoute: Char91DotmcpChar93ListToolsRoute,
