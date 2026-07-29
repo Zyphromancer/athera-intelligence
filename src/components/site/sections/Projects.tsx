@@ -1,6 +1,5 @@
 import { TiltCard } from "@/components/site/TiltCard";
 import { Link } from "@tanstack/react-router";
-import sentinel from "@/assets/projects/sentinel.jpg";
 import meridian from "@/assets/projects/meridian.jpg";
 import orbit from "@/assets/projects/orbit.jpg";
 import lumen from "@/assets/projects/lumen.jpg";
@@ -16,15 +15,6 @@ const projects = [
     tags: ["Next.js", "TypeScript", "Vimeo API", "Tailwind"],
     image: trenfotballCover.url,
     caseStudy: "trenfotball" as const,
-  },
-  {
-    title: "Sentinel AI",
-    category: "Studio project · In development",
-    badge: "In development",
-    pitch: "Real-time forensic engine that scores images, video frames and text for AI-generated content.",
-    outcomes: ["96% precision on the internal benchmark", "Sub-300 ms inference per asset", "In active development"],
-    tags: ["Python", "PyTorch", "FastAPI", "Chrome Extension"],
-    image: sentinel,
   },
   {
     title: "Meridian",
@@ -61,8 +51,8 @@ export function Projects({ limit, showMore = false }: { limit?: number; showMore
       <div className="mx-auto max-w-7xl px-6">
         <div className="mx-auto max-w-2xl text-center">
           <p className="text-[10px] sm:text-xs uppercase tracking-[0.35em] sm:tracking-[0.5em] text-[oklch(0.82_0.14_86)]">Selected work</p>
-          <h2 className="mt-4 font-display text-4xl text-gold-metallic sm:text-5xl md:text-6xl">Projects</h2>
-          <p className="mt-4 text-muted-foreground">Recent engagements across AI, web, and native apps.</p>
+          <h2 className="mt-4 font-display text-4xl text-gold-metallic sm:text-5xl md:text-6xl">Client Projects</h2>
+          <p className="mt-4 text-muted-foreground">Recent partnership work across AI, web, and native apps.</p>
         </div>
         <div className="mt-12 sm:mt-16 grid gap-6 sm:gap-8 md:grid-cols-2">
           {items.map((p) => (

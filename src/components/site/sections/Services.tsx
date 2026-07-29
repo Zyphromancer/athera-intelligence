@@ -11,12 +11,12 @@ const services = [
 
 export function Services() {
   return (
-    <section id="services" className="relative py-16 md:py-24 lg:py-32">
+    <section id="partnerships" className="relative py-16 md:py-24 lg:py-32">
       <div className="mx-auto max-w-7xl px-6">
         <div className="mx-auto max-w-2xl text-center">
-          <p className="text-[10px] sm:text-xs uppercase tracking-[0.35em] sm:tracking-[0.5em] text-[oklch(0.82_0.14_86)]">What we do</p>
-          <h2 className="mt-4 font-display text-4xl text-gold-metallic sm:text-5xl md:text-6xl">Services</h2>
-          <p className="mt-4 text-muted-foreground">A compact, senior team that ships. We cover the whole spectrum — from a first technical spike to a production system your team can own.</p>
+          <p className="text-[10px] sm:text-xs uppercase tracking-[0.35em] sm:tracking-[0.5em] text-[oklch(0.82_0.14_86)]">Work with us</p>
+          <h2 className="mt-4 font-display text-4xl text-gold-metallic sm:text-5xl md:text-6xl">Partnerships</h2>
+          <p className="mt-4 text-muted-foreground">The same research and engineering that powers our own products, applied to yours. We partner with a select group of clients to build software, web platforms, and AI systems that hold up in production.</p>
         </div>
         <div className="mt-12 sm:mt-16 grid gap-5 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {services.map((s) => (

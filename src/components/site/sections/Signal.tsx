@@ -6,15 +6,14 @@ type Metric = {
   suffix?: string;
   prefix?: string;
   decimals?: number;
-  caption: string;
+  caption?: string;
   spark: number[];
 };
 
 const metrics: Metric[] = [
-  { label: "Projects shipped", value: 87, suffix: "+", caption: "Across AI, web and native platforms", spark: [4, 6, 5, 8, 9, 11, 10, 13, 15, 14, 17, 20] },
-  { label: "Average time-to-launch", value: 9.4, suffix: " wks", decimals: 1, caption: "From kickoff to production release", spark: [18, 16, 15, 13, 14, 12, 11, 10, 9, 10, 9, 8] },
-  { label: "Detection precision", value: 96.3, suffix: "%", decimals: 1, caption: "Sentinel AI benchmark, Q4 2025", spark: [70, 74, 78, 80, 82, 85, 87, 90, 92, 93, 95, 96] },
-  { label: "Uptime, past 12 months", value: 99.99, suffix: "%", decimals: 2, caption: "Across all managed production systems", spark: [99.8, 99.9, 99.85, 99.95, 99.98, 99.99, 99.99, 99.97, 99.99, 99.99, 100, 99.99] },
+  { label: "Shipping production work", value: 7, suffix: "+ years", spark: [1, 1, 2, 2, 3, 3, 4, 5, 5, 6, 6, 7] },
+  { label: "Average time-to-launch", value: 8.0, suffix: " weeks", decimals: 1, caption: "From kickoff to production", spark: [18, 16, 15, 13, 14, 12, 11, 10, 9, 10, 9, 8] },
+  { label: "Detection precision", value: 96, suffix: "%", caption: "Sentinel internal benchmark, Q4 2025", spark: [70, 74, 78, 80, 82, 85, 87, 90, 92, 93, 95, 96] },
 ];
 
 function useInView<T extends HTMLElement>(threshold = 0.35) {
@@ -113,10 +112,10 @@ export function Signal() {
         <div className="mx-auto max-w-2xl text-center">
           <p className="text-[10px] sm:text-xs uppercase tracking-[0.35em] sm:tracking-[0.5em] text-[oklch(0.82_0.14_86)]">Signal</p>
           <h2 className="mt-4 font-display text-4xl text-gold-metallic sm:text-5xl md:text-6xl">The record, in numbers</h2>
-          <p className="mt-4 text-muted-foreground">A live look at what our engagements ship — and what they hold up to in production.</p>
+          <p className="mt-4 text-muted-foreground">A live look at what the lab ships — and what it holds up to in production.</p>
         </div>
 
-        <div ref={ref} className="mt-12 sm:mt-16 grid gap-5 sm:gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div ref={ref} className="mt-12 sm:mt-16 grid gap-5 sm:gap-6 sm:grid-cols-3">
           {metrics.map((m, i) => (
             <article
               key={m.label}
@@ -142,7 +141,7 @@ export function Signal() {
                 <Counter value={m.value} prefix={m.prefix} suffix={m.suffix} decimals={m.decimals} run={inView} />
               </div>
               <p className="mt-3 text-sm font-medium text-foreground">{m.label}</p>
-              <p className="mt-1 text-xs text-muted-foreground">{m.caption}</p>
+              {m.caption && <p className="mt-1 text-xs text-muted-foreground">{m.caption}</p>}
               <div className="mt-5">
                 <Sparkline points={m.spark} run={inView} />
               </div>

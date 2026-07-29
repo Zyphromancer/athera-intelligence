@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
 
 const links = [
+  { to: "/", hash: "research", label: "Research" },
+  { to: "/", hash: "products", label: "Products" },
   { to: "/work", label: "Work" },
   { to: "/case-studies", label: "Case studies" },
   { to: "/approach", label: "Approach" },
@@ -28,8 +30,9 @@ export function SiteNav() {
         <nav className="hidden lg:flex items-center gap-8">
           {links.map((l) => (
             <Link
-              key={l.to}
+              key={l.label}
               to={l.to}
+              hash={"hash" in l ? l.hash : undefined}
               className="group relative text-sm text-muted-foreground transition-colors hover:text-foreground"
               activeProps={{ className: "text-foreground" }}
             >
@@ -51,7 +54,7 @@ export function SiteNav() {
         <div className="lg:hidden border-t border-[oklch(0.82_0.14_86_/_0.15)] bg-background/95 backdrop-blur-xl">
           <div className="flex flex-col gap-1 px-6 py-4">
             {links.map((l) => (
-              <Link key={l.to} to={l.to} onClick={() => setOpen(false)} className="py-2 text-sm text-muted-foreground hover:text-foreground">
+              <Link key={l.label} to={l.to} hash={"hash" in l ? l.hash : undefined} onClick={() => setOpen(false)} className="py-2 text-sm text-muted-foreground hover:text-foreground">
                 {l.label}
               </Link>
             ))}

@@ -6,7 +6,7 @@ export default defineTool({
   name: "list_projects",
   title: "List projects",
   description:
-    "Return the list of Athera Intelligence projects shown on the site (client work, concept builds, and studio projects) with pitch, outcomes, and tech tags.",
+    "Return the list of Athera Intelligence client projects shown on the site (client work and concept builds) with pitch, outcomes, and tech tags.",
   inputSchema: {},
   annotations: { readOnlyHint: true, idempotentHint: true, openWorldHint: false },
   handler: () => ({
