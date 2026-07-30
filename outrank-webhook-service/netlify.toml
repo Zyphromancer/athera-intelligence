@@ -1,0 +1,12 @@
+# Deploy this directory as its OWN Netlify site (set "Base directory" to
+# outrank-webhook-service in the site's build settings) — separate from the
+# athera-intelligence.com marketing site. See README.md.
+
+[build]
+  functions = "netlify/functions"
+  command = "npm install"
+
+[[redirects]]
+  from = "/*"
+  to = "/.netlify/functions/api/:splat"
+  status = 200

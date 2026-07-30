@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ApproachRouteImport } from './routes/approach'
+import { Route as BlogRouteImport } from './routes/blog'
 import { Route as CaseStudiesRouteImport } from './routes/case-studies'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as ExampleRouteImport } from './routes/example'
@@ -24,6 +25,8 @@ import { Route as Char91DotmcpChar93ListToolsRouteImport } from './routes/[.mcp]
 import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
 import { Route as ApiBookACallRouteImport } from './routes/api/book-a-call'
 import { Route as ApiContactRouteImport } from './routes/api/contact'
+import { Route as BlogIndexRouteImport } from './routes/blog.index'
+import { Route as BlogSlugRouteImport } from './routes/blog.$slug'
 import { Route as CaseStudiesIndexRouteImport } from './routes/case-studies.index'
 import { Route as CaseStudiesSlugRouteImport } from './routes/case-studies.$slug'
 import { Route as Char91DotmcpChar93InvokeToolToolRouteImport } from './routes/[.mcp]/invoke-tool/$tool'
@@ -38,6 +41,11 @@ const IndexRoute = IndexRouteImport.update({
 const ApproachRoute = ApproachRouteImport.update({
   id: '/approach',
   path: '/approach',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogRoute = BlogRouteImport.update({
+  id: '/blog',
+  path: '/blog',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CaseStudiesRoute = CaseStudiesRouteImport.update({
@@ -107,6 +115,16 @@ const ApiContactRoute = ApiContactRouteImport.update({
   path: '/api/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BlogIndexRoute = BlogIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => BlogRoute,
+} as any)
+const BlogSlugRoute = BlogSlugRouteImport.update({
+  id: '/$slug',
+  path: '/$slug',
+  getParentRoute: () => BlogRoute,
+} as any)
 const CaseStudiesIndexRoute = CaseStudiesIndexRouteImport.update({
   id: '/',
   path: '/',
@@ -138,6 +156,7 @@ const EmailTransactionalPreviewRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/approach': typeof ApproachRoute
+  '/blog': typeof BlogRouteWithChildren
   '/case-studies': typeof CaseStudiesRouteWithChildren
   '/contact': typeof ContactRoute
   '/example': typeof ExampleRoute
@@ -151,7 +170,9 @@ export interface FileRoutesByFullPath {
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/api/book-a-call': typeof ApiBookACallRoute
   '/api/contact': typeof ApiContactRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/case-studies/$slug': typeof CaseStudiesSlugRoute
+  '/blog/': typeof BlogIndexRoute
   '/case-studies/': typeof CaseStudiesIndexRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/email/auth/preview': typeof EmailAuthPreviewRoute
@@ -172,7 +193,9 @@ export interface FileRoutesByTo {
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/api/book-a-call': typeof ApiBookACallRoute
   '/api/contact': typeof ApiContactRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/case-studies/$slug': typeof CaseStudiesSlugRoute
+  '/blog': typeof BlogIndexRoute
   '/case-studies': typeof CaseStudiesIndexRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/email/auth/preview': typeof EmailAuthPreviewRoute
@@ -182,6 +205,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/approach': typeof ApproachRoute
+  '/blog': typeof BlogRouteWithChildren
   '/case-studies': typeof CaseStudiesRouteWithChildren
   '/contact': typeof ContactRoute
   '/example': typeof ExampleRoute
@@ -195,7 +219,9 @@ export interface FileRoutesById {
   '/.well-known/oauth-protected-resource': typeof Char91DotwellKnownChar93OauthProtectedResourceRoute
   '/api/book-a-call': typeof ApiBookACallRoute
   '/api/contact': typeof ApiContactRoute
+  '/blog/$slug': typeof BlogSlugRoute
   '/case-studies/$slug': typeof CaseStudiesSlugRoute
+  '/blog/': typeof BlogIndexRoute
   '/case-studies/': typeof CaseStudiesIndexRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/email/auth/preview': typeof EmailAuthPreviewRoute
@@ -206,6 +232,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/approach'
+    | '/blog'
     | '/case-studies'
     | '/contact'
     | '/example'
@@ -219,7 +246,9 @@ export interface FileRouteTypes {
     | '/.well-known/oauth-protected-resource'
     | '/api/book-a-call'
     | '/api/contact'
+    | '/blog/$slug'
     | '/case-studies/$slug'
+    | '/blog/'
     | '/case-studies/'
     | '/.mcp/invoke-tool/$tool'
     | '/email/auth/preview'
@@ -240,7 +269,9 @@ export interface FileRouteTypes {
     | '/.well-known/oauth-protected-resource'
     | '/api/book-a-call'
     | '/api/contact'
+    | '/blog/$slug'
     | '/case-studies/$slug'
+    | '/blog'
     | '/case-studies'
     | '/.mcp/invoke-tool/$tool'
     | '/email/auth/preview'
@@ -249,6 +280,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/approach'
+    | '/blog'
     | '/case-studies'
     | '/contact'
     | '/example'
@@ -262,7 +294,9 @@ export interface FileRouteTypes {
     | '/.well-known/oauth-protected-resource'
     | '/api/book-a-call'
     | '/api/contact'
+    | '/blog/$slug'
     | '/case-studies/$slug'
+    | '/blog/'
     | '/case-studies/'
     | '/.mcp/invoke-tool/$tool'
     | '/email/auth/preview'
@@ -272,6 +306,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   ApproachRoute: typeof ApproachRoute
+  BlogRoute: typeof BlogRouteWithChildren
   CaseStudiesRoute: typeof CaseStudiesRouteWithChildren
   ContactRoute: typeof ContactRoute
   ExampleRoute: typeof ExampleRoute
@@ -304,6 +339,13 @@ declare module '@tanstack/react-router' {
       path: '/approach'
       fullPath: '/approach'
       preLoaderRoute: typeof ApproachRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blog': {
+      id: '/blog'
+      path: '/blog'
+      fullPath: '/blog'
+      preLoaderRoute: typeof BlogRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/case-studies': {
@@ -397,6 +439,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiContactRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/blog/': {
+      id: '/blog/'
+      path: '/'
+      fullPath: '/blog/'
+      preLoaderRoute: typeof BlogIndexRouteImport
+      parentRoute: typeof BlogRoute
+    }
+    '/blog/$slug': {
+      id: '/blog/$slug'
+      path: '/$slug'
+      fullPath: '/blog/$slug'
+      preLoaderRoute: typeof BlogSlugRouteImport
+      parentRoute: typeof BlogRoute
+    }
     '/case-studies/': {
       id: '/case-studies/'
       path: '/'
@@ -435,6 +491,18 @@ declare module '@tanstack/react-router' {
   }
 }
 
+interface BlogRouteChildren {
+  BlogSlugRoute: typeof BlogSlugRoute
+  BlogIndexRoute: typeof BlogIndexRoute
+}
+
+const BlogRouteChildren: BlogRouteChildren = {
+  BlogSlugRoute: BlogSlugRoute,
+  BlogIndexRoute: BlogIndexRoute,
+}
+
+const BlogRouteWithChildren = BlogRoute._addFileChildren(BlogRouteChildren)
+
 interface CaseStudiesRouteChildren {
   CaseStudiesSlugRoute: typeof CaseStudiesSlugRoute
   CaseStudiesIndexRoute: typeof CaseStudiesIndexRoute
@@ -452,6 +520,7 @@ const CaseStudiesRouteWithChildren = CaseStudiesRoute._addFileChildren(
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   ApproachRoute: ApproachRoute,
+  BlogRoute: BlogRouteWithChildren,
   CaseStudiesRoute: CaseStudiesRouteWithChildren,
   ContactRoute: ContactRoute,
   ExampleRoute: ExampleRoute,
