@@ -24,6 +24,7 @@ import { Route as Char91DotmcpChar93ListToolsRouteImport } from './routes/[.mcp]
 import { Route as Char91DotwellKnownChar93OauthProtectedResourceRouteImport } from './routes/[.well-known]/oauth-protected-resource'
 import { Route as ApiBookACallRouteImport } from './routes/api/book-a-call'
 import { Route as ApiContactRouteImport } from './routes/api/contact'
+import { Route as CaseStudiesIndexRouteImport } from './routes/case-studies.index'
 import { Route as CaseStudiesSlugRouteImport } from './routes/case-studies.$slug'
 import { Route as Char91DotmcpChar93InvokeToolToolRouteImport } from './routes/[.mcp]/invoke-tool/$tool'
 import { Route as EmailAuthPreviewRouteImport } from './routes/email/auth/preview'
@@ -106,6 +107,11 @@ const ApiContactRoute = ApiContactRouteImport.update({
   path: '/api/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CaseStudiesIndexRoute = CaseStudiesIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => CaseStudiesRoute,
+} as any)
 const CaseStudiesSlugRoute = CaseStudiesSlugRouteImport.update({
   id: '/$slug',
   path: '/$slug',
@@ -146,6 +152,7 @@ export interface FileRoutesByFullPath {
   '/api/book-a-call': typeof ApiBookACallRoute
   '/api/contact': typeof ApiContactRoute
   '/case-studies/$slug': typeof CaseStudiesSlugRoute
+  '/case-studies/': typeof CaseStudiesIndexRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/email/auth/preview': typeof EmailAuthPreviewRoute
   '/email/transactional/preview': typeof EmailTransactionalPreviewRoute
@@ -153,7 +160,6 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/approach': typeof ApproachRoute
-  '/case-studies': typeof CaseStudiesRouteWithChildren
   '/contact': typeof ContactRoute
   '/example': typeof ExampleRoute
   '/insights': typeof InsightsRoute
@@ -167,6 +173,7 @@ export interface FileRoutesByTo {
   '/api/book-a-call': typeof ApiBookACallRoute
   '/api/contact': typeof ApiContactRoute
   '/case-studies/$slug': typeof CaseStudiesSlugRoute
+  '/case-studies': typeof CaseStudiesIndexRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/email/auth/preview': typeof EmailAuthPreviewRoute
   '/email/transactional/preview': typeof EmailTransactionalPreviewRoute
@@ -189,6 +196,7 @@ export interface FileRoutesById {
   '/api/book-a-call': typeof ApiBookACallRoute
   '/api/contact': typeof ApiContactRoute
   '/case-studies/$slug': typeof CaseStudiesSlugRoute
+  '/case-studies/': typeof CaseStudiesIndexRoute
   '/.mcp/invoke-tool/$tool': typeof Char91DotmcpChar93InvokeToolToolRoute
   '/email/auth/preview': typeof EmailAuthPreviewRoute
   '/email/transactional/preview': typeof EmailTransactionalPreviewRoute
@@ -212,6 +220,7 @@ export interface FileRouteTypes {
     | '/api/book-a-call'
     | '/api/contact'
     | '/case-studies/$slug'
+    | '/case-studies/'
     | '/.mcp/invoke-tool/$tool'
     | '/email/auth/preview'
     | '/email/transactional/preview'
@@ -219,7 +228,6 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/approach'
-    | '/case-studies'
     | '/contact'
     | '/example'
     | '/insights'
@@ -233,6 +241,7 @@ export interface FileRouteTypes {
     | '/api/book-a-call'
     | '/api/contact'
     | '/case-studies/$slug'
+    | '/case-studies'
     | '/.mcp/invoke-tool/$tool'
     | '/email/auth/preview'
     | '/email/transactional/preview'
@@ -254,6 +263,7 @@ export interface FileRouteTypes {
     | '/api/book-a-call'
     | '/api/contact'
     | '/case-studies/$slug'
+    | '/case-studies/'
     | '/.mcp/invoke-tool/$tool'
     | '/email/auth/preview'
     | '/email/transactional/preview'
@@ -387,6 +397,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiContactRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/case-studies/': {
+      id: '/case-studies/'
+      path: '/'
+      fullPath: '/case-studies/'
+      preLoaderRoute: typeof CaseStudiesIndexRouteImport
+      parentRoute: typeof CaseStudiesRoute
+    }
     '/case-studies/$slug': {
       id: '/case-studies/$slug'
       path: '/$slug'
@@ -420,10 +437,12 @@ declare module '@tanstack/react-router' {
 
 interface CaseStudiesRouteChildren {
   CaseStudiesSlugRoute: typeof CaseStudiesSlugRoute
+  CaseStudiesIndexRoute: typeof CaseStudiesIndexRoute
 }
 
 const CaseStudiesRouteChildren: CaseStudiesRouteChildren = {
   CaseStudiesSlugRoute: CaseStudiesSlugRoute,
+  CaseStudiesIndexRoute: CaseStudiesIndexRoute,
 }
 
 const CaseStudiesRouteWithChildren = CaseStudiesRoute._addFileChildren(
