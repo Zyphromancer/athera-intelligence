@@ -8,16 +8,27 @@ function toSummary(article) {
   return summary;
 }
 
-router.get("/", (req, res) => {
-  res.json({ articles: listArticles().map(toSummary) });
+router.get("/", async (req, res) => {
+  try {
+    const articles = await listArticles();
+    res.json({ articles: articles.map(toSummary) });
+  } catch (err) {
+    console.error("[articles] Failed to list articles:", err.message);
+    res.status(502).json({ error: "Failed to load articles" });
+  }
 });
 
-router.get("/:slug", (req, res) => {
-  const article = getArticleBySlug(req.params.slug);
-  if (!article) {
-    return res.status(404).json({ error: "Article not found" });
+router.get("/:slug", async (req, res) => {
+  try {
+    const article = await getArticleBySlug(req.params.slug);
+    if (!article) {
+      return res.status(404).json({ error: "Article not found" });
+    }
+    res.json({ article });
+  } catch (err) {
+    console.error("[articles] Failed to load article:", err.message);
+    res.status(502).json({ error: "Failed to load article" });
   }
-  res.json({ article });
 });
 
 module.exports = router;

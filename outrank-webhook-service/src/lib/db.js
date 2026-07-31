@@ -1,54 +1,70 @@
-const fs = require("fs");
-const path = require("path");
+const { getSupabase } = require("./supabase");
 
-const DATA_DIR = path.join(__dirname, "..", "..", "data");
-const DB_FILE = path.join(DATA_DIR, "articles.json");
-
-function ensureStore() {
-  if (!fs.existsSync(DATA_DIR)) fs.mkdirSync(DATA_DIR, { recursive: true });
-  if (!fs.existsSync(DB_FILE)) fs.writeFileSync(DB_FILE, "[]\n", "utf8");
+function rowToArticle(row) {
+  return {
+    slug: row.slug,
+    title: row.title,
+    contentHtml: row.content_html,
+    excerpt: row.excerpt,
+    tags: row.tags || [],
+    coverImage: row.cover_image,
+    readingMinutes: row.reading_minutes,
+    publishedAt: row.published_at,
+    updatedAt: row.updated_at,
+    source: row.source,
+  };
 }
 
-function readAll() {
-  ensureStore();
-  try {
-    const raw = fs.readFileSync(DB_FILE, "utf8");
-    const parsed = JSON.parse(raw || "[]");
-    return Array.isArray(parsed) ? parsed : [];
-  } catch (err) {
-    console.error("[db] Failed to read/parse articles.json, starting empty:", err.message);
-    return [];
-  }
+function articleToRow(article) {
+  return {
+    slug: article.slug,
+    title: article.title,
+    content_html: article.contentHtml,
+    excerpt: article.excerpt,
+    tags: article.tags,
+    cover_image: article.coverImage,
+    reading_minutes: article.readingMinutes,
+    published_at: article.publishedAt,
+    updated_at: article.updatedAt,
+    source: article.source,
+  };
 }
 
-function writeAll(articles) {
-  ensureStore();
-  fs.writeFileSync(DB_FILE, JSON.stringify(articles, null, 2) + "\n", "utf8");
+async function listArticles() {
+  const { data, error } = await getSupabase()
+    .from("articles")
+    .select("*")
+    .order("published_at", { ascending: false });
+
+  if (error) throw new Error(`[db] listArticles failed: ${error.message}`);
+  return (data || []).map(rowToArticle);
 }
 
-function listArticles() {
-  return readAll()
-    .slice()
-    .sort((a, b) => new Date(b.publishedAt).getTime() - new Date(a.publishedAt).getTime());
-}
+async function getArticleBySlug(slug) {
+  const { data, error } = await getSupabase()
+    .from("articles")
+    .select("*")
+    .eq("slug", slug)
+    .maybeSingle();
 
-function getArticleBySlug(slug) {
-  return readAll().find((a) => a.slug === slug);
+  if (error) throw new Error(`[db] getArticleBySlug failed: ${error.message}`);
+  return data ? rowToArticle(data) : undefined;
 }
 
 // Upserts by slug: a re-delivered webhook for the same slug replaces the
 // existing entry (Outrank retries webhooks on timeout, so this must be
-// idempotent) but keeps the original createdAt/publishedAt.
-function upsertArticle(article) {
-  const all = readAll();
-  const idx = all.findIndex((a) => a.slug === article.slug);
-  if (idx === -1) {
-    all.push(article);
-  } else {
-    all[idx] = { ...all[idx], ...article, publishedAt: all[idx].publishedAt };
-  }
-  writeAll(all);
-  return article;
+// idempotent) but keeps the original publishedAt.
+async function upsertArticle(article) {
+  const existing = await getArticleBySlug(article.slug);
+  const row = articleToRow({
+    ...article,
+    publishedAt: existing?.publishedAt || article.publishedAt,
+  });
+
+  const { error } = await getSupabase().from("articles").upsert(row, { onConflict: "slug" });
+
+  if (error) throw new Error(`[db] upsertArticle failed: ${error.message}`);
+  return { ...article, publishedAt: row.published_at };
 }
 
 module.exports = { listArticles, getArticleBySlug, upsertArticle };

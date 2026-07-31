@@ -1,13 +1,7 @@
 const express = require("express");
 const { requireOutrankToken } = require("../lib/auth");
 const { upsertArticle, getArticleBySlug } = require("../lib/db");
-const {
-  slugify,
-  sanitizeArticleHtml,
-  estimateReadingMinutes,
-  buildExcerpt,
-  writeMarkdownFile,
-} = require("../lib/content");
+const { slugify, sanitizeArticleHtml, estimateReadingMinutes, buildExcerpt } = require("../lib/content");
 
 const router = express.Router();
 
@@ -26,7 +20,7 @@ function normalizePayload(body) {
   return { title, contentHtml, slugInput, metaDescription, tags, coverImage };
 }
 
-router.post("/outrank", requireOutrankToken, (req, res) => {
+router.post("/outrank", requireOutrankToken, async (req, res) => {
   const { title, contentHtml, slugInput, metaDescription, tags, coverImage } = normalizePayload(req.body || {});
 
   if (!title || !contentHtml) {
@@ -38,40 +32,35 @@ router.post("/outrank", requireOutrankToken, (req, res) => {
     return res.status(400).json({ error: "Could not derive a URL slug from the payload" });
   }
 
-  const cleanHtml = sanitizeArticleHtml(contentHtml);
-  const existing = getArticleBySlug(slug);
-  const now = new Date().toISOString();
-
-  const article = {
-    slug,
-    title: String(title).trim(),
-    contentHtml: cleanHtml,
-    excerpt: metaDescription ? String(metaDescription).trim() : buildExcerpt(cleanHtml),
-    tags,
-    coverImage: coverImage || null,
-    readingMinutes: estimateReadingMinutes(cleanHtml),
-    publishedAt: existing?.publishedAt || now,
-    updatedAt: now,
-    source: "outrank",
-  };
-
-  upsertArticle(article);
-
-  let markdownPath = null;
   try {
-    markdownPath = writeMarkdownFile(article);
-  } catch (err) {
-    // Non-fatal: the article is already durably stored in articles.json,
-    // and the API endpoints below read from that, not the markdown file.
-    console.error("[webhook] Failed to write markdown file:", err.message);
-  }
+    const cleanHtml = sanitizeArticleHtml(contentHtml);
+    const existing = await getArticleBySlug(slug);
+    const now = new Date().toISOString();
 
-  return res.status(existing ? 200 : 201).json({
-    success: true,
-    slug: article.slug,
-    updated: Boolean(existing),
-    markdownPath,
-  });
+    const article = {
+      slug,
+      title: String(title).trim(),
+      contentHtml: cleanHtml,
+      excerpt: metaDescription ? String(metaDescription).trim() : buildExcerpt(cleanHtml),
+      tags,
+      coverImage: coverImage || null,
+      readingMinutes: estimateReadingMinutes(cleanHtml),
+      publishedAt: existing?.publishedAt || now,
+      updatedAt: now,
+      source: "outrank",
+    };
+
+    await upsertArticle(article);
+
+    return res.status(existing ? 200 : 201).json({
+      success: true,
+      slug: article.slug,
+      updated: Boolean(existing),
+    });
+  } catch (err) {
+    console.error("[webhook] Failed to store article:", err.message);
+    return res.status(502).json({ error: "Failed to store article" });
+  }
 });
 
 module.exports = router;
