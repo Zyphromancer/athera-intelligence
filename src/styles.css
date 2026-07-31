@@ -177,3 +177,67 @@ html, body {
   animation: marquee 40s linear infinite;
   width: max-content;
 }
+
+/* Styles third-party article HTML (from outrank-webhook-service) rendered
+   via dangerouslySetInnerHTML on /blog/$slug — kept in sync with the real
+   theme tokens above rather than a second, hardcoded palette. */
+.article-body {
+  font-size: 1rem;
+  line-height: 1.75;
+  color: oklch(0.94 0.015 85 / 90%);
+}
+
+.article-body > * + * {
+  margin-top: 1.5em;
+}
+
+.article-body h1,
+.article-body h2,
+.article-body h3 {
+  font-family: var(--font-display);
+  color: var(--foreground);
+  line-height: 1.2;
+}
+
+.article-body h1 { font-size: 2rem; margin-top: 2em; }
+.article-body h2 { font-size: 1.6rem; margin-top: 2em; }
+.article-body h3 { font-size: 1.3rem; margin-top: 1.75em; }
+
+.article-body a {
+  color: oklch(0.9 0.15 90);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.article-body strong {
+  color: var(--foreground);
+  font-weight: 600;
+}
+
+.article-body blockquote {
+  border-left: 2px solid oklch(0.82 0.14 86 / 60%);
+  padding-left: 1.25em;
+  font-style: italic;
+  color: var(--foreground);
+}
+
+.article-body ul,
+.article-body ol {
+  padding-left: 1.5em;
+}
+
+.article-body ul { list-style: disc; }
+.article-body ol { list-style: decimal; }
+
+.article-body img {
+  border-radius: var(--radius-lg);
+  width: 100%;
+}
+
+.article-body code {
+  background: oklch(0.82 0.14 86 / 10%);
+  border-radius: 4px;
+  padding: 0.15em 0.4em;
+  font-size: 0.9em;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+}
